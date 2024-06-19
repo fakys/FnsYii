@@ -1,4 +1,6 @@
-<?php \backend\assets\AppAsset::register($this) ?>
+<?php use backend\components\SidebarComponent;
+
+\backend\assets\AppAsset::register($this) ?>
 
 
 <?php $this->beginPage()?>
@@ -107,7 +109,7 @@
                 </div>
             </div>
             <div>
-                !!!!
+                <?=SidebarComponent::widget()?>
             </div>
         </div>
     </aside>

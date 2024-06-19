@@ -26,6 +26,10 @@ services:
     image: mysql:5.7
     environment:
       - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./tmp/db:/var/lib/mysql
+    depends_on:
+      - phpmyadmin
 
   phpmyadmin:
     image: phpmyadmin
