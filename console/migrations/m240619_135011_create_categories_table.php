@@ -12,6 +12,11 @@ class m240619_135011_create_categories_table extends Migration
      */
     public function safeUp()
     {
+        $tableOptions= null;
+        if($this->db->driverName === 'mysql'){
+            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
+        }
+
         $this->createTable('{{%categories}}', [
             'id' => $this->primaryKey(),
             'title'=>$this->string()->notNull()->unique(),
@@ -19,7 +24,7 @@ class m240619_135011_create_categories_table extends Migration
             'icon'=>$this->string(500),
             'created_at'=>$this->dateTime(),
             'updated_at'=>$this->dateTime()
-        ]);
+        ], $tableOptions);
         $this->addForeignKey(
             'fk-categories-catalog_id',
             'categories',
