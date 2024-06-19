@@ -1,81 +1,142 @@
-<?php
+<?php \backend\assets\AppAsset::register($this) ?>
 
-/** @var \yii\web\View $this */
-/** @var string $content */
 
-use backend\assets\AppAsset;
-use common\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
-
-AppAsset::register($this);
-?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<?php $this->beginPage()?>
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <?php $this->head()?>
+    <title><?=$this->title?></title>
 </head>
-<body class="d-flex flex-column h-100">
-<?php $this->beginBody() ?>
+<body>
+<?php $this->beginBody()?>
 
-<header>
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    }     
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
-        'items' => $menuItems,
-    ]);
-    if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/site/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
-    } else {
-        echo Html::beginForm(['/site/logout'], 'post', ['class' => 'd-flex'])
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout text-decoration-none']
-            )
-            . Html::endForm();
-    }
-    NavBar::end();
-    ?>
-</header>
 
-<main role="main" class="flex-shrink-0">
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+<div class="wrapper">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <div class="nav-link pushmenu" data-widget="pushmenu" role="button">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Главная</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="navbar-search-block">
+                    <form class="form-inline">
+                        <div class="input-group input-group-sm">
+                            <input class="form-control form-control-navbar" type="search" placeholder="Поиск" aria-label="Search">
+                            <div class="input-group-append">
+                                <button class="btn btn-navbar" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="far fa-comments"></i>
+                    <!--          !!!!-->
+                    <span class="badge badge-danger navbar-badge">5</span>
+                    <!--          !!!!-->
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="#">
+                    <i class="far fa-bell"></i>
+                    <!--          !!!!-->
+                    <span class="badge badge-warning navbar-badge">15</span>
+                    <!--          !!!!-->
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" role="button">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" role="button">
+                    <i class="fa fa-window-restore" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+<!--  !!!!! user ava---->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <div class="brand-link-container text-center">
+            <a href="#" class="brand-link">
+                <span class="brand-text font-weight-light">FNS</span>
+            </a>
+        </div>
+        <div class="sidebar">
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="#" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block">###</a>
+                </div>
+            </div>
+            <div class="form-inline">
+                <div class="input-group" data-widget="sidebar-search">
+                    <input class="form-control form-control-sidebar sidebar-search-input" type="search" placeholder="Поиск" aria-label="Search">
+                    <div class="input-group-append">
+                        <button class="btn btn-sidebar btn-white">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                !!!!
+            </div>
+        </div>
+    </aside>
+
+    <div class="content-wrapper">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0"><?=$this->title?></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="content">
+            <?=$content?>
+        </section>
     </div>
-</main>
+    <footer class="main-footer">
+        <strong>FNS &copy; 2014-2024.</strong>
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0
+        </div>
+    </footer>
+</div>
 
-<footer class="footer mt-auto py-3 text-muted">
-    <div class="container">
-        <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
-<?php $this->endBody() ?>
+
+<?php $this->endBody()?>
 </body>
 </html>
-<?php $this->endPage();
+<?php $this->endPage()?>

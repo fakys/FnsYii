@@ -14,8 +14,18 @@ use yii\web\Response;
  */
 class SiteController extends Controller
 {
+    public $layout='main';
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => \yii\web\ErrorAction::class,
+            ],
+        ];
+    }
     public function actionIndex()
     {
-        return 12123213;
+        $this->view->title = 'Админ панель';
+        return $this->render('index');
     }
 }
