@@ -28,4 +28,8 @@ class SiteController extends Controller
         $this->view->title = 'Админ панель';
         return $this->render('index');
     }
+    public function actionTest()
+    {
+        return 213123;
+    }
 }
