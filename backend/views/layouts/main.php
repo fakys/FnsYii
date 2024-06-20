@@ -1,4 +1,5 @@
 <?php use backend\components\SidebarComponent;
+use yii\helpers\Url;
 
 \backend\assets\AppAsset::register($this) ?>
 
@@ -27,7 +28,7 @@
                 </div>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Главная</a>
+                <a href="<?=Url::to(['/admin'])?>" class="nav-link">Главная</a>
             </li>
         </ul>
 
@@ -85,7 +86,7 @@
 <!--  !!!!! user ava---->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <div class="brand-link-container text-center">
-            <a href="#" class="brand-link">
+            <a href="<?=Url::to(['/admin'])?>" class="brand-link">
                 <span class="brand-text font-weight-light">FNS</span>
             </a>
         </div>

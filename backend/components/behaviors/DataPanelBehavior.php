@@ -21,7 +21,12 @@ class DataPanelBehavior extends Behavior
 
     public function show_model($table)
     {
-
+        foreach ($this->data as $val){
+            if($val::tableName() == $table){
+                return $val;
+            }
+        }
+        return null;
     }
     public function get_models()
     {

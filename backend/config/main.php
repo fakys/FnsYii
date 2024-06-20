@@ -41,6 +41,7 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'admin/show-model/<table>'=>'admin/show-model/'
             ],
         ],
     ],
