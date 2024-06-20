@@ -8,4 +8,9 @@ class User extends ActiveRecord
     {
         return 'users';
     }
+
+    public static function tableLabel()
+    {
+        return 'Пользователи';
+    }
 }

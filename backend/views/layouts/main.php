@@ -98,16 +98,6 @@
                     <a href="#" class="d-block">###</a>
                 </div>
             </div>
-            <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar sidebar-search-input" type="search" placeholder="Поиск" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar btn-white">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
             <div>
                 <?=SidebarComponent::widget()?>
             </div>
@@ -124,7 +114,7 @@
                 </div>
             </div>
         </div>
-        <section class="content">
+        <section class="container">
             <?=$content?>
         </section>
     </div>

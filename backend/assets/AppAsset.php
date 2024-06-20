@@ -14,12 +14,13 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/admin/adminlte.min.css',
         'css/admin/all.min.css',
+        'css/admin/stile.css'
     ];
     public $js = [
         'js/admin/adminlte.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset',
+        'yii\bootstrap5\BootstrapAsset'
     ];
 }

@@ -8,4 +8,9 @@ class Sale extends ActiveRecord
     {
         return 'sales';
     }
+
+    public static function tableLabel()
+    {
+        return 'Акции';
+    }
 }

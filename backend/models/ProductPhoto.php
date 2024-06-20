@@ -8,4 +8,5 @@ class ProductPhoto extends ActiveRecord
     {
         return 'product_photos';
     }
+
 }

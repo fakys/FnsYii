@@ -8,4 +8,9 @@ class Product extends ActiveRecord
     {
         return 'products';
     }
+
+    public static function tableLabel()
+    {
+        return 'Продукты';
+    }
 }

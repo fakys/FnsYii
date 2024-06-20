@@ -8,4 +8,9 @@ class Catalog extends ActiveRecord
     {
         return 'catalogs';
     }
+
+    public static function tableLabel()
+    {
+        return 'Каталоги';
+    }
 }

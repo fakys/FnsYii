@@ -8,4 +8,9 @@ class Category extends ActiveRecord
     {
         return 'categories';
     }
+
+    public static function tableLabel()
+    {
+        return 'Категории';
+    }
 }

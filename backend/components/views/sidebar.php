@@ -6,11 +6,10 @@
             <a href="#" class="nav-link admin-nav-link">
                 <i class="nav-icon fa fa-table" aria-hidden="true"></i>
                 <p>
-                    <?= $value::tableName()?>
+                    <?= $value::tableLabel()?>
                 </p>
             </a>
         </li>
         <?php endforeach;?>
     </ul>
-    123123213
 </div>

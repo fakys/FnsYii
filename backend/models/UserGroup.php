@@ -8,4 +8,9 @@ class UserGroup extends ActiveRecord
     {
         return 'user_groups';
     }
+
+    public static function tableLabel()
+    {
+        return 'Группы';
+    }
 }
