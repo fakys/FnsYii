@@ -6,3 +6,7 @@
 .tr-admin-table td{
     font-size: 18px;
 }
+.help-block{
+    color: red;
+    font-size: 12px;
+}

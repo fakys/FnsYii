@@ -6,4 +6,4 @@ use backend\components\CreateObjectsComponent;
 ?>
 
 
-<?=CreateObjectsComponent::widget($model);?>
+<?=CreateObjectsComponent::widget(['model'=>$model]);?>

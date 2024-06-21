@@ -42,7 +42,12 @@ class AdminController extends Controller{
     {
         if($this->show_model($table)){
             $model = $this->show_model($table);
-            $this->view->title = "Создание объекта в '{$model::tableLabel()}'";
+            $this->view->title = "Создание объекта в '{$this->show_model($table)::tableLabel()}'";
+            $model = new $model();
+            $model->scenario = $model::CREATE;
+            if(Yii::$app->request->method == 'POST'){
+
+            }
         }else{
             return Yii::$app->response->setStatusCode(404);
         }

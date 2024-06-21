@@ -5,7 +5,7 @@ use yii\base\Widget;
 
 class CreateObjectsComponent extends Widget
 {
-    protected $model;
+    public $model;
 
     public function __construct($config = [])
     {
@@ -16,9 +16,9 @@ class CreateObjectsComponent extends Widget
     public function run()
     {
         if($this->model){
-
+            $view = "create/create_{$this->model::tableName()}";
         }
-        return 23123;
+        return $this->render($view, ['model'=>$this->model]);
     }
 
 }
