@@ -21,7 +21,7 @@ use yii\helpers\Url;
         <th scope="row"><?=$key+1?></th>
         <td><?=$val::tableName()?></td>
         <td><a href="<?=Url::to(['/admin/show-model', 'table'=>$val::tableName()])?>"><?=$val::tableLabel()?></a></td>
-        <td><a href="#" class="btn btn-success p-1">Добавить</a></td>
+        <td><a href="<?=Url::to(['/admin/create', 'table'=>$val::tableName()])?>" class="btn btn-success p-1">Добавить</a></td>
     </tr>
     <?php endforeach;?>
     </tbody>
