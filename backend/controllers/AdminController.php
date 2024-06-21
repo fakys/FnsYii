@@ -46,7 +46,7 @@ class AdminController extends Controller{
             $model = new $model();
             $model->scenario = $model::CREATE;
             if(Yii::$app->request->method == 'POST'){
-
+                $model->validate();
             }
         }else{
             return Yii::$app->response->setStatusCode(404);

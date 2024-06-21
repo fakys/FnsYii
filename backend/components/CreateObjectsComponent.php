@@ -13,6 +13,19 @@ class CreateObjectsComponent extends Widget
         $this->model = isset($config['model'])? $config['model']: null;
     }
 
+    public function test()
+    {
+        dd(3123213);
+    }
+
+    public static function adapt_drop_list($data, string $field)
+    {
+        $arr = [];
+        foreach ($data as $key=>$val){
+            $arr[$val['id']] = $val[$field];
+        }
+        return $arr;
+    }
     public function run()
     {
         if($this->model){

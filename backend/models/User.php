@@ -35,7 +35,11 @@ class User extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'email', 'password'], 'required', 'on'=>self::CREATE]
+            [['name', 'email', 'password'], 'required', 'on'=>self::CREATE],
+            ['email', 'email'],
+            ['avatar', 'image', 'extensions'=>'png, jpg, gif'],
+            ['status', 'boolean'],
+            ['group_id', 'integer']
         ];
     }
 }
