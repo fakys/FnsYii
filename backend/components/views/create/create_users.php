@@ -9,7 +9,6 @@ use yii\widgets\ActiveForm;
 $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
 ?>
 
-
 <?php $form = ActiveForm::begin(['enableClientValidation' => false])?>
     <?= $form->field($model, 'name')?>
     <?= $form->field($model, 'email')?>

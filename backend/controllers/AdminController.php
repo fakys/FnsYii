@@ -4,6 +4,7 @@ namespace backend\controllers;
 use backend\components\behaviors\DataPanelBehavior;
 use backend\models\User;
 use Yii;
+use yii\base\InvalidRouteException;
 use yii\web\Controller;
 use function Psy\debug;
 
@@ -38,6 +39,9 @@ class AdminController extends Controller{
         return $this->render('show_model', compact('objects', 'columns', 'model'));
     }
 
+    /**
+     * @throws InvalidRouteException
+     */
     public function actionCreate($table)
     {
         if($this->show_model($table)){
@@ -46,7 +50,10 @@ class AdminController extends Controller{
             $model = new $model();
             $model->scenario = $model::CREATE;
             if(Yii::$app->request->method == 'POST'){
-                $model->validate();
+                $model->load(Yii::$app->request->post());
+                if($model->save()){
+                    return  Yii::$app->response->redirect(['admin/show-model', 'table'=>$model::tableName()]);
+                }
             }
         }else{
             return Yii::$app->response->setStatusCode(404);

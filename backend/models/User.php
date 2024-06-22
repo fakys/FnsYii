@@ -1,9 +1,25 @@
 <?php
 namespace backend\models;
 
+use Yii;
+use yii\base\Exception;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\web\UploadedFile;
+
 class User extends ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return[
+            [
+                'class'=>TimestampBehavior::class,
+                'value' => new Expression('NOW()')
+            ]
+        ];
+    }
 
     public const CREATE  = 'create';
     public const UPDATE  = 'update';
@@ -31,6 +47,49 @@ class User extends ActiveRecord
             'created_at'=>"Время создания",
             'updated_at'=>"Время обновления"
         ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function hasPassword()
+    {
+        if($this->password){
+            $this->password = Yii::$app->security->generatePasswordHash($this->password);
+        }
+
+    }
+    public function add_status()
+    {
+        if(!$this->status){
+            $this->status = false;
+        }
+    }
+    private function add_user_ava()
+    {
+        $file = UploadedFile::getInstance($this, 'avatar');
+        $ava_name = Yii::$app->security->generateRandomString();
+        if($file){
+            $this->avatar = "storage/users_avatars/{$ava_name}.{$file->getExtension()}";
+            $file->saveAs("@frontend/web/{$this->avatar}");
+        }else{
+            $this->avatar = "image/user/default_user_ava.png";
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function beforeSave($insert)
+    {
+        parent::beforeSave($insert);
+        if($insert){
+            $this->add_user_ava();
+            $this->hasPassword();
+        }else{
+
+        }
+        return true;
     }
     public function rules()
     {
