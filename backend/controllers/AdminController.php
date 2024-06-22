@@ -31,7 +31,7 @@ class AdminController extends Controller{
         if($this->show_model($table)){
             $model = $this->show_model($table);
             $columns = array_slice($model::getTableSchema()->getColumnNames(), 0, 3);
-            $objects = $model::find()->all();
+            $objects = $model::find()->asArray()->all();
         }else{
             return Yii::$app->response->setStatusCode(404);
         }
