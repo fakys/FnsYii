@@ -1,9 +1,12 @@
 <?php
 namespace backend\models;
 
+use Yii;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\web\UploadedFile;
 
 class Sale extends ActiveRecord
 {
@@ -35,6 +38,7 @@ class Sale extends ActiveRecord
         return [
             [['sale'], 'required', 'on'=>self::CREATE],
             ['title', 'string'],
+            ['description', 'string', 'length'=>[10, 4000]],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
         ];
     }
@@ -47,5 +51,29 @@ class Sale extends ActiveRecord
             'description'=>'Описание',
             'icon'=>'Изображение'
         ];
+    }
+
+    private function add_icon()
+    {
+        $file = UploadedFile::getInstance($this, 'icon');
+        $file_name = Yii::$app->security->generateRandomString();
+        if($file){
+            $this->icon = "storage/sales/{$file_name}.{$file->getExtension()}";
+            $file->saveAs("@frontend/web/{$this->icon}");
+        }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function beforeSave($insert)
+    {
+        parent::beforeSave($insert);
+        if($insert){
+            $this->add_icon();
+        }else{
+
+        }
+        return true;
     }
 }

@@ -10,7 +10,7 @@ $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
 
 
 <?php $form = ActiveForm::begin(['enableClientValidation' => false])?>
-    <?= $form->field($model, 'sale')?>
+    <?= $form->field($model, 'sale')->input('number')?>
     <?= $form->field($model, 'title')?>
     <?= $form->field($model, 'description')->textarea()?>
     <?= $form->field($model, 'icon')->fileInput(['class'=>'form-control', 'accept'=>'image/png, image/gif, image/jpeg'])?>
