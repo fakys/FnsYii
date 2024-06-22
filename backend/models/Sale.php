@@ -1,9 +1,22 @@
 <?php
 namespace backend\models;
 
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
+
 class Sale extends ActiveRecord
 {
+
+    public function behaviors()
+    {
+        return[
+            [
+                'class'=>TimestampBehavior::class,
+                'value' => new Expression('NOW()')
+            ]
+        ];
+    }
 
     public const CREATE  = 'create';
     public const UPDATE  = 'update';

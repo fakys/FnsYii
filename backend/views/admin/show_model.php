@@ -22,7 +22,11 @@
             <tr class="tr-admin-table">
                 <?php foreach ($obj as $filed=>$value):?>
                     <?php if(in_array($filed, $columns)):?>
-                        <td><?=(strlen($value)>20)? substr($value, 0, 20)."..." : $value?></td>
+                        <?php if($value):?>
+                            <td><?=(strlen($value)>20)? substr($value, 0, 20)."..." : $value?></td>
+                        <?php else:?>
+                            <td><div class="val-null">Null</div></td>
+                        <?php endif;?>
                     <?php endif;?>
                 <?php endforeach;?>
                 <td><a href="#" class="btn btn-primary p-1">Просмотреть</a></td>

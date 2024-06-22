@@ -1,9 +1,25 @@
 <?php
 namespace backend\models;
 
+use Yii;
+use yii\base\Exception;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
+use yii\web\UploadedFile;
+
 class UserGroup extends ActiveRecord
 {
+    public function behaviors()
+    {
+        return[
+            [
+                'class'=>TimestampBehavior::class,
+                'value' => new Expression('NOW()')
+            ]
+        ];
+    }
+
     public const CREATE  = 'create';
     public const UPDATE  = 'update';
 
@@ -32,4 +48,28 @@ class UserGroup extends ActiveRecord
             'icon'=>'Изображение'
         ];
     }
+
+    /**
+     * @throws Exception
+     */
+    private function add_icon()
+    {
+        $icon = UploadedFile::getInstance($this ,'icon');
+        if($icon){
+            $this->icon = "storage/user_groups/".Yii::$app->security->generateRandomString().".{$icon->getExtension()}";
+            $icon->saveAs("@frontend/web/{$this->icon}");
+        }
+    }
+
+    public function beforeSave($insert)
+    {
+        parent::beforeSave($insert);
+        if($insert){
+            $this->add_icon();
+        }else{
+
+        }
+        return true;
+    }
+
 }
