@@ -43,7 +43,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 'admin/show-model/<table>'=>'admin/show-model/',
-                'admin/create/<table>'=>'admin/create/'
+                'admin/create/<table>'=>'admin/create/',
+                'admin/delete/<table>/<id>'=>'admin/delete/'
             ],
         ],
     ],

@@ -39,6 +39,20 @@ class AdminController extends Controller{
         return $this->render('show_model', compact('objects', 'columns', 'model'));
     }
 
+    public function actionDelete($table, $id)
+    {
+//        dd(213213);
+        $model = $this->show_model($table);
+        if($model){
+            $obj = $model::findOne($id);
+            if($obj){
+                $obj->delete();
+            }
+            return Yii::$app->response->redirect(['admin/show-model', 'table'=>$table]);
+        }
+        return Yii::$app->response->setStatusCode(404);
+    }
+
     /**
      * @throws InvalidRouteException
      */

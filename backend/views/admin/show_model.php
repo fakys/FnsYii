@@ -5,6 +5,8 @@
  * @var array $columns
  */
 
+use yii\helpers\Url;
+
 ?>
 <table class="table">
     <thead class="table-dark">
@@ -31,7 +33,7 @@
                 <?php endforeach;?>
                 <td><a href="#" class="btn btn-primary p-1">Просмотреть</a></td>
                 <td><a href="#" class="btn btn-success p-1">Изменить</a></td>
-                <td><a href="#" class="btn btn-danger p-1">Удалить</a></td>
+                <td><a href="<?=Url::to(['admin/delete', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-danger p-1">Удалить</a></td>
             </tr>
         <?php endforeach;?>
     </tbody>
