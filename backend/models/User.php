@@ -10,6 +10,7 @@ use yii\web\UploadedFile;
 
 class User extends ActiveRecord
 {
+    public $password_confirm;
 
     public function behaviors()
     {
@@ -45,7 +46,8 @@ class User extends ActiveRecord
             'password'=>"Пароль",
             'status'=>"Статус",
             'created_at'=>"Время создания",
-            'updated_at'=>"Время обновления"
+            'updated_at'=>"Время обновления",
+            'password_confirm'=>"Повторите пароль"
         ];
     }
 
@@ -98,7 +100,8 @@ class User extends ActiveRecord
             ['email', 'email'],
             ['avatar', 'image', 'extensions'=>'png, jpg, gif'],
             ['status', 'boolean'],
-            ['group_id', 'integer']
+            ['group_id', 'integer'],
+            ['password', 'compare', 'compareAttribute'=>'password_confirm']
         ];
     }
 }

@@ -15,6 +15,7 @@ $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
     <?= $form->field($model, 'group_id')->dropDownList(CreateObjectsComponent::adapt_drop_list($group, 'title'))?>
     <?= $form->field($model, 'avatar')->fileInput(['class'=>'form-control', 'accept'=>'image/png, image/gif, image/jpeg'])?>
     <?= $form->field($model, 'status')->checkbox()?>
-    <?= $form->field($model, 'password')?>
+    <?= $form->field($model, 'password')->input('password')?>
+    <?= $form->field($model, 'password_confirm')->input('password')?>
     <div><input class="btn btn-primary" type="submit" value="Создать"></div>
 <?php ActiveForm::end()?>

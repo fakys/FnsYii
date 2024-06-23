@@ -53,6 +53,10 @@ class Sale extends ActiveRecord
         ];
     }
 
+    /**
+     * @throws Exception
+     * @throws \yii\db\Exception
+     */
     private function add_icon()
     {
         $file = UploadedFile::getInstance($this, 'icon');

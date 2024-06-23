@@ -7,13 +7,11 @@ use yii\db\Expression;
 
 class ProductPhoto extends ActiveRecord
 {
-    public function behaviors()
+    public function rules()
     {
-        return[
-            [
-                'class'=>TimestampBehavior::class,
-                'value' => new Expression('NOW()')
-            ]
+        return [
+            ['photo', 'image'],
+            ['product_id', 'number']
         ];
     }
     public static function tableName()
