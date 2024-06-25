@@ -35,7 +35,8 @@ class Category extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required', 'on'=>self::CREATE],
+            [['title'], 'required', 'on'=>[self::CREATE, self::UPDATE]],
+            ['title', 'unique'],
             ['catalog_id', 'integer'],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
         ];
@@ -56,17 +57,15 @@ class Category extends ActiveRecord
         if($icon){
             $this->icon = "storage/categories/".Yii::$app->security->generateRandomString().".{$icon->getExtension()}";
             $icon->saveAs("@frontend/web/{$this->icon}");
+        }else{
+            unset($this->icon);
         }
     }
 
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);
-        if($insert){
-            $this->add_icon();
-        }else{
-
-        }
+        $this->add_icon();
         return true;
     }
 }
