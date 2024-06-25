@@ -35,6 +35,14 @@ use yii\helpers\Url;
                 <td><a href="<?=Url::to(['admin/update', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-success p-1">Изменить</a></td>
                 <td><a href="<?=Url::to(['admin/delete', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-danger p-1">Удалить</a></td>
             </tr>
+        <div class="delete-panel">
+            <div>
+                <div>
+                    <h3>Вы уверены что хотите удалить элемент из таблицы "<?=$model::tableLabel()?>"?</h3>
+                </div>
+                <div></div>
+            </div>
+        </div>
         <?php endforeach;?>
     </tbody>
 </table>
