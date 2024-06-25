@@ -13,10 +13,18 @@
 .val-null{
     color: #5c636a;
 }
-.image-container-update img{
+.images-container-update{
+    border-bottom: 1px solid gray;
+    margin-bottom: 10px;
+}
+.image-container-update img, .images-container-update img{
     max-width: 200px;
     max-height: 200px;
     min-width: 100px;
     min-height: 100px;
     margin-bottom: 10px;
+}
+.images-scroll-block{
+    height: 210px;
+    overflow-y: auto;
 }
