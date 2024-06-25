@@ -80,7 +80,7 @@ class AdminController extends Controller{
                $obj->load(Yii::$app->request->post());
                $obj->scenario = $obj::UPDATE;
                if($obj->save()){
-                   return Yii::$app->response->redirect(['admin/show-model', 'table'=>$table]);
+                   return Yii::$app->response->redirect(['admin/update', 'table'=>$table, 'id'=>$id]);
                }
            }
        }else{

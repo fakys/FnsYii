@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\UploadedFile;
+use function Psy\debug;
 
 class UserGroup extends ActiveRecord
 {
@@ -36,7 +37,8 @@ class UserGroup extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required', 'on'=>self::CREATE],
+            [['title'], 'required', 'on'=>[self::CREATE, self::UPDATE]],
+            ['title', 'unique'],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
         ];
     }
@@ -58,17 +60,15 @@ class UserGroup extends ActiveRecord
         if($icon){
             $this->icon = "storage/user_groups/".Yii::$app->security->generateRandomString().".{$icon->getExtension()}";
             $icon->saveAs("@frontend/web/{$this->icon}");
+        }else{
+            unset($this->icon);
         }
     }
 
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);
-        if($insert){
-            $this->add_icon();
-        }else{
-
-        }
+        $this->add_icon();
         return true;
     }
 

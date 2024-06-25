@@ -19,5 +19,5 @@ $catalogs = (new \yii\db\Query())->select(['id', 'title'])->from('catalogs')->al
         <?= $form->field($model, 'icon')->fileInput(['class'=>'form-control', 'accept'=>'image/png, image/gif, image/jpeg'])?>
     </div>
     <?=$form->field($model, 'catalog_id')->dropDownList(CreateObjectsComponent::adapt_drop_list($catalogs, 'title'))?>
-    <div><input class="btn btn-primary" type="submit" value="Создать"></div>
+    <div><input class="btn btn-primary" type="submit" value="Обновить"></div>
 <?php ActiveForm::end()?>

@@ -36,7 +36,8 @@ class Sale extends ActiveRecord
     public function rules()
     {
         return [
-            [['sale'], 'required', 'on'=>self::CREATE],
+            ['sale', 'required', 'on'=>[self::CREATE, self::UPDATE]],
+            ['sale', 'required'],
             ['title', 'string'],
             ['description', 'string', 'length'=>[10, 4000]],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
@@ -64,6 +65,8 @@ class Sale extends ActiveRecord
         if($file){
             $this->icon = "storage/sales/{$file_name}.{$file->getExtension()}";
             $file->saveAs("@frontend/web/{$this->icon}");
+        }else{
+            unset($this->icon);
         }
     }
 
@@ -73,11 +76,8 @@ class Sale extends ActiveRecord
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);
-        if($insert){
-            $this->add_icon();
-        }else{
+        $this->add_icon();
 
-        }
         return true;
     }
 }
