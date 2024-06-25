@@ -33,14 +33,26 @@ use yii\helpers\Url;
                 <?php endforeach;?>
                 <td><a href="#" class="btn btn-primary p-1">Просмотреть</a></td>
                 <td><a href="<?=Url::to(['admin/update', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-success p-1">Изменить</a></td>
-                <td><a href="<?=Url::to(['admin/delete', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-danger p-1">Удалить</a></td>
+                <td><div class="btn btn-danger p-1 btn-delete" data-id="<?=$obj['id']?>">Удалить</div></td>
             </tr>
-        <div class="delete-panel">
-            <div>
-                <div>
-                    <h3>Вы уверены что хотите удалить элемент из таблицы "<?=$model::tableLabel()?>"?</h3>
+        <div class="delete-panel-container delete-panel-<?=$obj['id']?>">
+            <div class="delete-panel">
+                <div class="head-delete-panel">
+                    <div class="logo-delete-panel">FNS</div>
+                    <div class="ml-auto close-delete-panel" data-id="<?=$obj['id']?>"><i class="fa fa-times" aria-hidden="true"></i></div>
                 </div>
-                <div></div>
+                <div class="body-delete-panel">
+                    <h3>Вы уверены что хотите удалить элемент из таблицы "<?=$model::tableLabel()?>"?</h3>
+                    <ul>
+                        <div class="pt-3">Примечание:</div>
+                        <li>Все связанные объекты в родительских таблицах будут удалены</li>
+                        <li>Удаленные данные не возможно будет восстановить</li>
+                    </ul>
+                </div>
+                <div class="d-flex gap-3 mr-3 mb-2">
+                    <a href="<?=Url::to(['admin/delete', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-danger ml-auto">Удалить</a>
+                    <div class="btn btn-white close-delete-panel" data-id="<?=$obj['id']?>">Назад</div>
+                </div>
             </div>
         </div>
         <?php endforeach;?>
