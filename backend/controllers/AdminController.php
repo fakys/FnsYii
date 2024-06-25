@@ -41,7 +41,6 @@ class AdminController extends Controller{
 
     public function actionDelete($table, $id)
     {
-//        dd(213213);
         $model = $this->show_model($table);
         if($model){
             $obj = $model::findOne($id);
@@ -53,9 +52,6 @@ class AdminController extends Controller{
         return Yii::$app->response->setStatusCode(404);
     }
 
-    /**
-     * @throws InvalidRouteException
-     */
     public function actionCreate($table)
     {
         if($this->show_model($table)){
@@ -73,5 +69,23 @@ class AdminController extends Controller{
             return Yii::$app->response->setStatusCode(404);
         }
         return $this->render('create', compact('model'));
+    }
+
+    public function actionUpdate($table, $id)
+    {
+       $model = $this->show_model($table);
+       if($model){
+           $obj = $model::findOne($id);
+           if (Yii::$app->request->isPost){
+               $obj->load(Yii::$app->request->post());
+               $obj->scenario = $obj::UPDATE;
+               if($obj->save()){
+                   return Yii::$app->response->redirect(['admin/show-model', 'table'=>$table]);
+               }
+           }
+       }else{
+           return Yii::$app->response->setStatusCode(404);
+       }
+       return $this->render('update', compact('obj'));
     }
 }

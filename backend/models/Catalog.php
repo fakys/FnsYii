@@ -35,7 +35,8 @@ class Catalog extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required', 'on'=>self::CREATE],
+            [['title'], 'required', 'on'=>[self::CREATE, self::UPDATE]],
+            ['title', 'unique'],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
         ];
     }
@@ -54,17 +55,15 @@ class Catalog extends ActiveRecord
         if($icon){
             $this->icon = "storage/catalogs/".Yii::$app->security->generateRandomString().".{$icon->getExtension()}";
             $icon->saveAs("@frontend/web/{$this->icon}");
+        }else{
+            unset($this->icon);
         }
     }
 
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);
-        if($insert){
-            $this->add_icon();
-        }else{
-
-        }
+        $this->add_icon();
         return true;
     }
 }

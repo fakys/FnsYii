@@ -13,3 +13,10 @@
 .val-null{
     color: #5c636a;
 }
+.image-container-update img{
+    max-width: 200px;
+    max-height: 200px;
+    min-width: 100px;
+    min-height: 100px;
+    margin-bottom: 10px;
+}

@@ -12,6 +12,9 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [],
+    'aliases'=>[
+        '@frontendUrl'=>'http://localhost:20080'
+    ],
     'language'=>'ru-RU',
     'components' => [
         'request' => [
@@ -44,7 +47,8 @@ return [
             'rules' => [
                 'admin/show-model/<table>'=>'admin/show-model/',
                 'admin/create/<table>'=>'admin/create/',
-                'admin/delete/<table>/<id>'=>'admin/delete/'
+                'admin/delete/<table>/<id>'=>'admin/delete/',
+                'admin/update/<table>/<id>'=>'admin/update/'
             ],
         ],
     ],

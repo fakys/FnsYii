@@ -3,7 +3,7 @@ namespace backend\components;
 
 use yii\base\Widget;
 
-class CreateObjectsComponent extends Widget
+class UpdateObjectsComponent extends Widget
 {
     public $model;
 
@@ -12,6 +12,7 @@ class CreateObjectsComponent extends Widget
         parent::__construct($config);
         $this->model = isset($config['model'])? $config['model']: null;
     }
+
 
     public static function adapt_drop_list($data, string $field)
     {
@@ -24,7 +25,7 @@ class CreateObjectsComponent extends Widget
     public function run()
     {
         if($this->model){
-            $view = "create/create_{$this->model::tableName()}";
+            $view = "update/update_{$this->model::tableName()}";
         }
         return $this->render($view, ['model'=>$this->model]);
     }

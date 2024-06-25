@@ -14,7 +14,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/admin/adminlte.min.css',
         'css/admin/all.min.css',
-        'css/admin/stile.css'
+        'css/admin/style.css'
     ];
     public $js = [
         'js/admin/adminlte.js'
