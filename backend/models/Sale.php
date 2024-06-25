@@ -41,6 +41,7 @@ class Sale extends ActiveRecord
             ['title', 'string'],
             ['description', 'string', 'length'=>[10, 4000]],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
 
@@ -50,14 +51,12 @@ class Sale extends ActiveRecord
             'sale'=>'Скидка',
             'title'=>'Название',
             'description'=>'Описание',
-            'icon'=>'Изображение'
+            'icon'=>'Изображение',
+            'created_at'=>"Время создания",
         ];
     }
 
-    /**
-     * @throws Exception
-     * @throws \yii\db\Exception
-     */
+
     private function add_icon()
     {
         $file = UploadedFile::getInstance($this, 'icon');
@@ -70,9 +69,7 @@ class Sale extends ActiveRecord
         }
     }
 
-    /**
-     * @throws Exception
-     */
+
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);

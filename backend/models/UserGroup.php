@@ -40,6 +40,7 @@ class UserGroup extends ActiveRecord
             [['title'], 'required', 'on'=>[self::CREATE, self::UPDATE]],
             ['title', 'unique'],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
 
@@ -47,7 +48,8 @@ class UserGroup extends ActiveRecord
     {
         return [
             'title'=>'Название',
-            'icon'=>'Изображение'
+            'icon'=>'Изображение',
+            'created_at'=>"Время создания"
         ];
     }
 

@@ -33,7 +33,8 @@ class Product extends ActiveRecord
         return [
             [['title', 'description', 'price'], 'required', 'on'=>'create'],
             [['main_photo', 'photos'], 'image', 'extensions'=>'png, jpg, gif'],
-            ['category_id', 'number']
+            ['category_id', 'number'],
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
     public static function tableLabel()
@@ -49,7 +50,8 @@ class Product extends ActiveRecord
             'price'=>'Цена',
             'main_photo'=>'Главное фото',
             'photos'=>'Фотографии',
-            'category_id'=>'Категории'
+            'category_id'=>'Категории',
+            'created_at'=>"Время создания"
         ];
     }
     public function add_main_photo()

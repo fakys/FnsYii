@@ -11,6 +11,7 @@ use yii\web\UploadedFile;
 class User extends ActiveRecord
 {
     public $password_confirm;
+    public $new_password;
 
     public function behaviors()
     {
@@ -44,6 +45,7 @@ class User extends ActiveRecord
             'group_id'=>'Группа',
             'avatar'=>"Аватал",
             'password'=>"Пароль",
+            'new_password'=>'Новый пароль',
             'status'=>"Статус",
             'created_at'=>"Время создания",
             'updated_at'=>"Время обновления",
@@ -51,9 +53,6 @@ class User extends ActiveRecord
         ];
     }
 
-    /**
-     * @throws Exception
-     */
     public function hasPassword()
     {
         if($this->password){
@@ -79,29 +78,49 @@ class User extends ActiveRecord
         }
     }
 
-    /**
-     * @throws Exception
-     */
+    public function update_user_ava()
+    {
+        $file = UploadedFile::getInstance($this, 'avatar');
+        $ava_name = Yii::$app->security->generateRandomString();
+        if($file){
+            $this->avatar = "storage/users_avatars/{$ava_name}.{$file->getExtension()}";
+            $file->saveAs("@frontend/web/{$this->avatar}");
+        }else{
+            unset($this->avatar);
+        }
+    }
+    public function update_password()
+    {
+        if($this->new_password){
+            $this->password = $this->new_password;
+        }
+    }
+
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);
         if($insert){
             $this->add_user_ava();
-            $this->hasPassword();
         }else{
-
+            $this->update_user_ava();
+            $this->update_password();
         }
+        $this->hasPassword();
         return true;
     }
     public function rules()
     {
         return [
             [['name', 'email', 'password'], 'required', 'on'=>self::CREATE],
+            [['name', 'email'], 'required', 'on'=>self::UPDATE],
+            [['new_password', 'password', 'password_confirm','name'], 'string'],
             ['email', 'email'],
             ['avatar', 'image', 'extensions'=>'png, jpg, gif'],
             ['status', 'boolean'],
             ['group_id', 'integer'],
-            ['password', 'compare', 'compareAttribute'=>'password_confirm']
+            ['new_password', 'compare', 'compareAttribute'=>'password_confirm', 'on'=>self::UPDATE],
+            ['password', 'compare', 'compareAttribute'=>'password_confirm', 'on'=>self::CREATE],
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
 }

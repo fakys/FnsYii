@@ -5,4 +5,7 @@
 use backend\components\UpdateObjectsComponent;
 ?>
 
-<?=UpdateObjectsComponent::widget(['model'=>$obj])?>
+<div class="pb-5">
+    <?=UpdateObjectsComponent::widget(['model'=>$obj])?>
+</div>
+

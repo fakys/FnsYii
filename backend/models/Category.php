@@ -39,6 +39,7 @@ class Category extends ActiveRecord
             ['title', 'unique'],
             ['catalog_id', 'integer'],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
 
@@ -47,7 +48,8 @@ class Category extends ActiveRecord
         return [
             'title'=>'Название',
             'icon'=>'Изображение',
-            'catalog_id'=>'Каталог'
+            'catalog_id'=>'Каталог',
+            'created_at'=>"Время создания"
         ];
     }
 

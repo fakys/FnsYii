@@ -6,6 +6,7 @@
 use yii\db\Query;
 use yii\widgets\ActiveForm;
 $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
+
 ?>
 
 
@@ -22,5 +23,6 @@ $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
         <?php endif;?>
         <?= $form->field($model, 'icon')->fileInput(['class'=>'form-control', 'accept'=>'image/png, image/gif, image/jpeg'])?>
     </div>
+    <?= $form->field($model, 'created_at')->input('datetime-local')?>
     <div><input class="btn btn-primary" type="submit" value="Создать"></div>
 <?php ActiveForm::end()?>

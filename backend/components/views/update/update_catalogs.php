@@ -16,6 +16,6 @@ use yii\widgets\ActiveForm;
         </div>
         <?= $form->field($model, 'icon')->fileInput(['class'=>'form-control', 'accept'=>'image/png, image/gif, image/jpeg'])?>
     </div>
-    
+    <?= $form->field($model, 'created_at')->input('datetime-local')?>
     <div><input class="btn btn-primary" type="submit" value="Обновить"></div>
 <?php ActiveForm::end()?>
