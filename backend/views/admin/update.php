@@ -6,7 +6,6 @@ use backend\components\UpdateObjectsComponent;
 use yii\helpers\Url;
 
 ?>
-
 <div class="pb-5">
     <?=UpdateObjectsComponent::widget(['model'=>$obj])?>
     <div class="pt-3"><div class="btn btn-danger p-1 btn-delete" data-id="<?=$obj->id?>">Удалить</div></div>

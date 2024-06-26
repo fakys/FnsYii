@@ -88,4 +88,9 @@ class AdminController extends Controller{
        }
        return $this->render('update', compact('obj'));
     }
+
+    public function actionShowObject($table, $id)
+    {
+        return $this->render('show_object');
+    }
 }
