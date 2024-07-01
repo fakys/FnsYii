@@ -5,6 +5,7 @@
 
 use backend\components\CreateObjectsComponent;
 use yii\db\Query;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
 ?>
@@ -12,7 +13,7 @@ $group= (new Query())->select(['id', 'title'])->from('user_groups')->all();
 <?php $form = ActiveForm::begin(['enableClientValidation' => false])?>
     <?= $form->field($model, 'name')?>
     <?= $form->field($model, 'email')?>
-    <?= $form->field($model, 'group_id')->dropDownList(CreateObjectsComponent::adapt_drop_list($group, 'title'))?>
+    <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(ArrayHelper::merge([['id'=>null, 'title'=>'Не выбрано']],$group), 'id','title'))?>
 <div>
     <?php if($model->avatar):?>
         <label class="control-label">Старое фото</label>

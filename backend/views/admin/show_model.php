@@ -31,7 +31,7 @@ use yii\helpers\Url;
                         <?php endif;?>
                     <?php endif;?>
                 <?php endforeach;?>
-                <td><a href="#" class="btn btn-primary p-1">Просмотреть</a></td>
+                <td><a href="<?=Url::to(['admin/show-object', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-primary p-1">Просмотреть</a></td>
                 <td><a href="<?=Url::to(['admin/update', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-success p-1">Изменить</a></td>
                 <td><div class="btn btn-danger p-1 btn-delete" data-id="<?=$obj['id']?>">Удалить</div></td>
             </tr>

@@ -1,4 +1,4 @@
 <?php
 use backend\components\ShowObjectComponent;
 ?>
-<?=ShowObjectComponent::widget()?>
+<?=ShowObjectComponent::widget(['model'=>$model])?>

@@ -74,4 +74,9 @@ class UserGroup extends ActiveRecord
         return true;
     }
 
+
+    public function getUsers()
+    {
+        return $this->hasMany(User::class, ['group_id'=>'id']);
+    }
 }

@@ -86,3 +86,16 @@
     color: #000000;
     background: white;
 }
+.font-size-20{
+    font-size: 20px;
+}
+.content-scroll-block{
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    min-width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+}

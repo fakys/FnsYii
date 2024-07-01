@@ -91,6 +91,11 @@ class AdminController extends Controller{
 
     public function actionShowObject($table, $id)
     {
-        return $this->render('show_object');
+        if($this->show_model($table)){
+            $model = $this->show_model($table)::findOne($id);
+        }else{
+            Yii::$app->response->setStatusCode(404);
+        }
+        return $this->render('show_object', compact('model'));
     }
 }
