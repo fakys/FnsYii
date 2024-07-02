@@ -68,4 +68,9 @@ class Catalog extends ActiveRecord
         $this->add_icon();
         return true;
     }
+
+    public function getCategories()
+    {
+        return $this->hasMany(Category::class, ['catalog_id'=>'id']);
+    }
 }

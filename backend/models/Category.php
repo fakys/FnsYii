@@ -70,4 +70,13 @@ class Category extends ActiveRecord
         $this->add_icon();
         return true;
     }
+
+    public function getCatalog()
+    {
+        return $this->hasOne(Catalog::class, ['id'=>'catalog_id']);
+    }
+    public function getProducts()
+    {
+        return $this->hasMany(Product::class, ['category_id'=>'id']);
+    }
 }

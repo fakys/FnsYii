@@ -36,6 +36,7 @@ $products = $model->getProducts()->all();
     </div>
     <?php endif;?>
 
+    <?php if($products):?>
     <div class="card mb-3">
         <div class="card-header text-white  bg-dark">Твары</div>
         <div class="card-body show-scroll-block">
@@ -51,6 +52,7 @@ $products = $model->getProducts()->all();
             <?php endforeach;?>
         </div>
     </div>
+    <?php endif;?>
 
     <?php if($model->created_at):?>
         <div class="card mb-3">
