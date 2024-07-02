@@ -127,4 +127,5 @@ class User extends ActiveRecord
     {
         return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
     }
+
 }
