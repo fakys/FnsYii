@@ -71,7 +71,7 @@ use yii\helpers\Url;
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" role="button">
+                <a class="nav-link" href="#" role="button" data-widget="fullscreen">
                     <i class="fas fa-expand-arrows-alt"></i>
                 </a>
             </li>

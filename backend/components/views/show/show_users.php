@@ -50,7 +50,7 @@ $group = $model->getGroup()->one();
     <?php if($model->created_at):?>
         <div class="card mb-3">
             <div class="card-header text-white  bg-dark">Дата создания</div>
-            <div class="card-body">
+            <div class="card-body font-size-20">
                 <?=$model->created_at?>
             </div>
         </div>
@@ -58,7 +58,7 @@ $group = $model->getGroup()->one();
     <?php if($model->updated_at):?>
         <div class="card mb-3">
             <div class="card-header text-white  bg-dark">Дата обновления</div>
-            <div class="card-body">
+            <div class="card-body font-size-20">
                 <?=$model->updated_at?>
             </div>
         </div>

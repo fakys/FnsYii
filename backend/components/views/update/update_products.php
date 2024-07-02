@@ -9,7 +9,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 $categories= (new Query())->select(['id', 'title'])->from('categories')->all();
 $photos = $model->getPhotos()->asArray()->all();
-$sales = \backend\models\Sale::find()->all();
+$sales = \backend\models\Sale::find()->asArray()->all();
 $product_sales = [];
 
 foreach ($model->getSales()->asArray()->all() as $val){

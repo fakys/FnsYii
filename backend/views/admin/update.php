@@ -8,7 +8,11 @@ use yii\helpers\Url;
 ?>
 <div class="pb-5">
     <?=UpdateObjectsComponent::widget(['model'=>$obj])?>
-    <div class="pt-3"><div class="btn btn-danger p-1 btn-delete" data-id="<?=$obj->id?>">Удалить</div></div>
+    <div class="d-flex pt-3 gap-2">
+        <div ><div class="btn btn-danger btn-delete" data-id="<?=$obj->id?>">Удалить</div></div>
+        <div><a href="<?=Url::to(['admin/show-object', 'table'=>$obj::tableName(), 'id'=>$obj->id])?>" class="btn btn-success">Просмотреть</a></div>
+    </div>
+
     <div class="delete-panel-container delete-panel-<?=$obj->id?>">
         <div class="delete-panel">
             <div class="head-delete-panel">

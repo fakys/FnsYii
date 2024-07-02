@@ -86,6 +86,7 @@ class AdminController extends Controller{
        }else{
            return Yii::$app->response->setStatusCode(404);
        }
+       $this->view->title = "Изменение объекта таблицы '{$model::tableLabel()}'";
        return $this->render('update', compact('obj'));
     }
 
@@ -96,6 +97,7 @@ class AdminController extends Controller{
         }else{
             Yii::$app->response->setStatusCode(404);
         }
+        $this->view->title = "Просмотр объекта таблицы '{$model::tableLabel()}'";
         return $this->render('show_object', compact('model'));
     }
 }
