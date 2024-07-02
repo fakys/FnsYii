@@ -25,4 +25,9 @@ class ProductSale extends ActiveRecord
     {
         return $this->hasOne(Product::class, ['id'=>'product_id'])->one();
     }
+
+    public function getSale()
+    {
+        return $this->hasOne(Sale::class, ['id'=>'sale_id'])->one();
+    }
 }

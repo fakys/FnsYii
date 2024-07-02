@@ -155,8 +155,8 @@ class Product extends ActiveRecord
     {
         return $this->hasMany(ProductSale::class, ['product_id'=>'id']);
     }
-    public function getCatalog()
+    public function getCategories()
     {
-        return $this->hasOne(Catalog::class, ['id'=>'catalog_id']);
+        return $this->hasOne(Category::class, ['id'=>'category_id']);
     }
 }

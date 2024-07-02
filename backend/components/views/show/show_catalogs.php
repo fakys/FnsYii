@@ -30,7 +30,7 @@ $categories = $model->getCategories()->all();
             <div class="card-body show-scroll-block">
                 <?php foreach ($categories as $val):?>
                     <div class="d-flex">
-                        <div class="content-scroll-block">
+                        <div>
                             <a href="<?=Url::to(['admin/show-object', 'table'=>$val->tableName(), 'id'=>$val->id])?>" class="font-size-20"><?=$val->title?></a>
                         </div>
                         <div class="ml-auto">
