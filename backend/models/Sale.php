@@ -39,7 +39,7 @@ class Sale extends ActiveRecord
     {
         return [
             ['sale', 'required', 'on'=>[self::CREATE, self::UPDATE]],
-            ['sale', 'required'],
+            [['sale', 'title'], 'required'],
             ['title', 'string'],
             ['description', 'string', 'length'=>[10, 4000]],
             ['icon', 'image', 'extensions'=>'png, jpg, gif'],

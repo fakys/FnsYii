@@ -123,4 +123,8 @@ class User extends ActiveRecord
             ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
+    public function getGroup()
+    {
+        return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
+    }
 }

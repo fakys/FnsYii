@@ -33,5 +33,5 @@ foreach ($model->getProducts()->asArray()->all() as $val){
     </div>
     <?=$form->field($model, 'products[]')->dropDownList(ArrayHelper::map($products, 'id', 'title'), ['multiple'=>true, 'options' => $product_sales])?>
     <?= $form->field($model, 'created_at')->input('datetime-local')?>
-    <div><input class="btn btn-primary" type="submit" value="Создать"></div>
+    <div><input class="btn btn-primary" type="submit" value="Обновить"></div>
 <?php ActiveForm::end()?>
