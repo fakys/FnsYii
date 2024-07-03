@@ -76,7 +76,7 @@ use yii\helpers\Url;
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" role="button">
+                <a href="<?=Yii::getAlias('@frontendUrl')?>" class="nav-link" role="button">
                     <i class="fa fa-window-restore" aria-hidden="true"></i>
                 </a>
             </li>
