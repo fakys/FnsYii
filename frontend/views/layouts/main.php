@@ -26,7 +26,7 @@ $this->beginPage();
             <div class="d-flex justify-content-center align-items-center">
                 <div class="btn-catalog-header">
                     <i class="fa fa-bars" aria-hidden="true"></i>
-                    Каталог
+                    Каталоги
                 </div>
             </div>
 
@@ -56,8 +56,33 @@ $this->beginPage();
         </div>
     </div>
 </header>
-<?=$content?>
-sdsd
+<div class="main-navbar-container">
+    <div class="main-navbar">
+        <div class="close-btn-navbar">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <div class="navbar-title">
+            Каталоги
+        </div>
+        <div class="navbar-catalog-container">
+            <a href="#" class="navbar-catalog">
+                <div class="navbar-catalog-icon">
+                    <img src="<?=Yii::getAlias('@web').'image/site/not_image.png'?>">
+                </div>
+                <div class="navbar-catalog-text">
+                    sss
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="main-content">
+    <?=$content?>
+</div>
+<footer class="main-footer">
+    <div class="title-footer">FNS</div>
+    <div class="footer-main-footer">© 2002–2024 Компания FNS. Администрация Сайта не несет ответственности за размещаемые Пользователями материалы (в т.ч. информацию и изображения), их содержание и качество.</div>
+</footer>
 <?php $this->endBody()?>
 </body>
 </html>
