@@ -24,13 +24,15 @@
 }
 .content-block-index-page{
     display: flex;
-    gap: 15px;
+    gap: 50px;
     justify-content: space-around;
     padding: 0px 30px;
     overflow: auto;
 }
 .content-block-content{
     text-decoration: none;
+    width: 200px;
+    height: 230px;
 }
 .main-content-index-page{
     padding-top: 20px;
@@ -65,4 +67,14 @@
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 30px;
+}
+.product-image-block{
+    display: flex;
+    justify-content: center;
+}
+.cat-page{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 50px;
 }

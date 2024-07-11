@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Url;
+
 \frontend\assets\AppAsset::register($this);
 $catalog = \frontend\models\Catalog::find()->asArray()->all();
 
@@ -20,7 +23,7 @@ $this->beginPage();
     <div class="container">
         <div class="row">
             <div class="col-lg-1 text-center">
-                <a href="#" class="main-logo-header">
+                <a href="<?=Url::to(['/'])?>" class="main-logo-header">
                     FNS
                 </a>
             </div>

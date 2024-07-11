@@ -11,7 +11,7 @@
 
         <?php if($catalogs):?>
         <div class="block-index-page">
-            <a href="#" class="title-block-index-page">
+            <a href="<?=\yii\helpers\Url::to(['catalog/'])?>" class="title-block-index-page">
                 Каталог
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </a>
@@ -35,7 +35,7 @@
 
         <?php if($categories):?>
         <div class="block-index-page">
-            <a href="#" class="title-block-index-page">
+            <a href="<?=\yii\helpers\Url::to(['category/'])?>" class="title-block-index-page">
                 Катeгории
                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
             </a>
