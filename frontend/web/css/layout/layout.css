@@ -77,7 +77,8 @@
     margin-bottom: 10px;
 }
 .main-content{
-    height: 100vh;
+    min-height: 100vh;
+    padding-top: 100px;
 }
 .main-navbar-container{
     position: fixed;
@@ -90,7 +91,7 @@
     transition-duration: 0.3s;
     height: 100%;
     transform: translate(-1500px, 0px);
-    z-index: 2;
+    z-index: 100;
 }
 .main-navbar-background{
     background: rgba(124, 124, 124, 0.5);
@@ -99,8 +100,11 @@
     position: fixed;
     top: 0px;
     left: 0px;
-    z-index: 1;
+    z-index: 99;
     display: none;
+}
+.fixed-top{
+    z-index: 50;
 }
 .main-navbar{
     width: 80%;
