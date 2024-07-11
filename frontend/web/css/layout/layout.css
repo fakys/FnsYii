@@ -140,6 +140,9 @@
 .navbar-catalog-icon{
     width: 160px;
     height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .navbar-catalog-icon img{
     max-width: 150px;

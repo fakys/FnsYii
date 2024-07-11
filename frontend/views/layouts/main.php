@@ -1,5 +1,6 @@
 <?php
 \frontend\assets\AppAsset::register($this);
+$catalog = \frontend\models\Catalog::find()->asArray()->all();
 
 $this->beginPage();
 ?>
@@ -68,14 +69,20 @@ $this->beginPage();
             Каталоги
         </div>
         <div class="navbar-catalog-container">
+            <?php foreach ($catalog as $val):?>
             <a href="#" class="navbar-catalog">
                 <div class="navbar-catalog-icon">
-                    <img src="<?=Yii::getAlias('@web').'image/site/not_image.png'?>">
+                    <?php if(isset($val['icon'])):?>
+                        <img src="<?=Yii::getAlias('@web').$val['icon']?>">
+                    <?php else:?>
+                        <img src="<?=Yii::getAlias('@web').'image/site/not_image.png'?>">
+                    <?php endif;?>
                 </div>
                 <div class="navbar-catalog-text">
-                    sss
+                    <?=$val['title']?>
                 </div>
             </a>
+            <?php endforeach;?>
         </div>
     </div>
 </div>
