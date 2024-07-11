@@ -87,8 +87,20 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    transition-duration: 0.3s;
+    height: 100%;
+    transform: translate(-1500px, 0px);
+    z-index: 2;
+}
+.main-navbar-background{
     background: rgba(124, 124, 124, 0.5);
     height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    display: none;
 }
 .main-navbar{
     width: 80%;
@@ -139,4 +151,7 @@
 }
 .close-btn-navbar i:hover{
     color: var(--main-collor);
+}
+.open-navbar{
+    transform: translate(0px, 0px);
 }

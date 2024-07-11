@@ -22,7 +22,7 @@ $this->beginPage();
                 FNS
             </a>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-2 mb-2">
             <div class="d-flex justify-content-center align-items-center">
                 <div class="btn-catalog-header">
                     <i class="fa fa-bars" aria-hidden="true"></i>
@@ -31,7 +31,7 @@ $this->beginPage();
             </div>
 
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 mb-2">
             <form class="d-flex gap-2">
                 <input type="search" class="form-control search-input-header">
                 <div class="d-flex align-items-center">
@@ -56,6 +56,7 @@ $this->beginPage();
         </div>
     </div>
 </header>
+<div class="main-navbar-background"></div>
 <div class="main-navbar-container">
     <div class="main-navbar">
         <div class="close-btn-navbar">
