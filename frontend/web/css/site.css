@@ -62,7 +62,7 @@
 .btn-fav:hover{
     color: #DC3545FF;
 }
-.main-content-block{
+.main-content-block, .show_category_page{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
@@ -77,4 +77,8 @@
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 50px;
+}
+.h1{
+    color: #464646;
+    margin-bottom: 10px;
 }

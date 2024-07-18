@@ -14,7 +14,9 @@ $this->beginPage();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <?php if($this->title):?>
+        <title><?=$this->title?></title>
+    <?php endif;?>
     <?php $this->head()?>
 </head>
 <body>
@@ -76,7 +78,7 @@ $this->beginPage();
             <a href="#" class="navbar-catalog">
                 <div class="navbar-catalog-icon">
                     <?php if(isset($val['icon'])):?>
-                        <img src="<?=Yii::getAlias('@web').$val['icon']?>">
+                        <img src="<?=Yii::getAlias('@web').'/'.$val['icon']?>">
                     <?php else:?>
                         <img src="<?=Yii::getAlias('@web').'image/site/not_image.png'?>">
                     <?php endif;?>
@@ -89,7 +91,11 @@ $this->beginPage();
         </div>
     </div>
 </div>
-<div class="main-content">
+<div class="main-content container">
+    <?php if($this->title):?>
+        <h1 class="h1"><?=$this->title?></h1>
+    <?php endif;?>
+
     <?=$content?>
 </div>
 <footer class="main-footer">

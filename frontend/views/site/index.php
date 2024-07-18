@@ -18,7 +18,7 @@
 
             <div class="content-block-index-page">
                 <?php foreach ($catalogs as $val):?>
-                <a href="#" class="content-block-content">
+                <a href="<?=\yii\helpers\Url::to(['catalog/show', 'catalog'=>$val->title])?>" class="content-block-content">
                     <?php if($val->icon):?>
                         <div class="content-block-image"><img src="<?=Yii::getAlias('@web').$val->icon?>"></div>
                     <?php else:?>
@@ -42,7 +42,7 @@
 
                 <div class="content-block-index-page">
                     <?php foreach ($categories as $val):?>
-                    <a href="#" class="content-block-content">
+                    <a href="<?=\yii\helpers\Url::to(['/category/show', 'category'=>$val->title])?>" class="content-block-content">
                         <?php if($val->icon):?>
                             <div class="content-block-image"><img src="<?=Yii::getAlias('@web').$val->icon?>"></div>
                         <?php else:?>
@@ -60,8 +60,6 @@
         <div class="main-content-index-page">
             <h3 class="title">Товары</h3>
             <div class="main-content-block">
-
-
                 <?php foreach ($products as $val):?>
                 <div class="product-block">
                     <a href="#" class="product-image-block">
