@@ -15,7 +15,8 @@ class UserController extends Controller
 
     public function actionRegister()
     {
-
+        $user = new User();
+        return $this->render('register', compact('user'));
     }
 
 }

@@ -9,6 +9,8 @@ use yii\widgets\ActiveForm;
             <?=$form->field($user, 'name')?>
             <?=$form->field($user, 'password')->input('password')?>
             <input type="submit" class="btn-main mt-3" value="Войти">
+            <div class="font-size-12 mt-3">У вас ещё нет аккаунта??? <a href="<?=\yii\helpers\Url::to(['user/register'])?>">Зарегистрируйтесь</a></div>
         </div>
     <?php ActiveForm::end()?>
+
 </div>
