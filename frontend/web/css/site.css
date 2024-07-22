@@ -235,3 +235,12 @@
     color: white;
     border-radius: 10px;
 }
+.link-product{
+    color: var(--c-white-gray);
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+.link-product:hover{
+    color: var(--main-collor);
+}

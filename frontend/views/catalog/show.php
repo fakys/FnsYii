@@ -1,6 +1,6 @@
 <div class="cat-page">
     <?php foreach ($categories as $val):?>
-        <a href="#" class="content-block-content">
+        <a href="<?=\yii\helpers\Url::to(['category/show/', 'category'=>$val->title])?>" class="content-block-content">
             <?php if($val->icon):?>
                 <div class="content-block-image"><img src="<?=Yii::getAlias('@web')."/$val->icon"?>"></div>
             <?php else:?>

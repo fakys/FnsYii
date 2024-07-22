@@ -75,7 +75,7 @@ $this->beginPage();
         </div>
         <div class="navbar-catalog-container">
             <?php foreach ($catalog as $val):?>
-            <a href="#" class="navbar-catalog">
+            <a href="<?=\yii\helpers\Url::to(['/catalog/show', 'catalog'=>$val['title']])?>" class="navbar-catalog">
                 <div class="navbar-catalog-icon">
                     <?php if(isset($val['icon'])):?>
                         <img src="<?=Yii::getAlias('@web').'/'.$val['icon']?>">

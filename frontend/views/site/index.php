@@ -62,7 +62,7 @@
             <div class="main-content-block">
                 <?php foreach ($products as $val):?>
                 <div class="product-block">
-                    <a href="#" class="product-image-block">
+                    <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>$val->id])?>" class="product-image-block">
                         <?php if($val->main_photo):?>
                         <img src="<?=Yii::getAlias('@web').$val->main_photo?>">
                         <?php else:?>
@@ -70,7 +70,7 @@
                         <?php endif;?>
                     </a>
                     <div class="text-center">
-                        <a href="#">
+                        <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>$val->id])?>" class="link-product">
                             <?=$val->title?>
                         </a>
                     </div>
