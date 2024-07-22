@@ -1,4 +1,5 @@
 <div class="show_category_page">
+    <?php if($products):?>
     <?php foreach ($products as $val):?>
         <div class="product-block">
             <a href="#" class="product-image-block">
@@ -28,6 +29,17 @@
             </div>
         </div>
     <?php endforeach;?>
+    <?php else:?>
+    <div class="d-flex justify-content-center">
+        <div>
+            <h1 class="h1">В этой категории пока нет товара</h1>
+            <p>Видимо в этой категории пока нет товара, в скором времени его добовят</p>
+            <div class="d-flex">
+                <a href="#" class="btn-main font-size-20">На главную</a>
+            </div>
+        </div>
+    </div>
 
+    <?php endif;?>
 
 </div>

@@ -83,7 +83,7 @@
                                 <i class="fa fa-heart" aria-hidden="true"></i>
                             </div>
                             <div class="p-0 btn-buy">
-                                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                <i class="fa fa-shopping-cart font-size-20" aria-hidden="true"></i>
                             </div>
                         </div>
                     </div>

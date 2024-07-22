@@ -20,9 +20,7 @@ class CategoryController extends Controller
         $category= Category::find()->where(['title'=>$category])->one();
         if($category){
             $products = $category->getProducts()->all();
-            if($products){
-                return $this->render('show', compact('products'));
-            }
+            return $this->render('show', compact('products'));
         }
         return \Yii::$app->response->setStatusCode(404);
 
