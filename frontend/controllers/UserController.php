@@ -21,7 +21,6 @@ class UserController extends Controller
     public function actionRegister()
     {
         $user = new User();
-        dd(Yii::$app->user->isGuest);
         if(Yii::$app->request->isPost){
             $user->load(Yii::$app->request->post());
             if($user->save()){

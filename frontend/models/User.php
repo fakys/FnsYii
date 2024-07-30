@@ -1,12 +1,15 @@
 <?php
 namespace frontend\models;
 
+use Yii;
+use yii\base\Exception;
 use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
 
     public $password_confirm;
+
     public static function tableName()
     {
         return 'users';
@@ -30,12 +33,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     }
     public static function findIdentity($id)
     {
-        // TODO: Implement findIdentity() method.
+        return static::findOne($id);
     }
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        // TODO: Implement findIdentityByAccessToken() method.
+        return static::findOne(['access_token' => $token]);
     }
 
     public function getId()
@@ -45,11 +48,39 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
     public function getAuthKey()
     {
-        // TODO: Implement getAuthKey() method.
+        return $this->auth_key;
     }
 
     public function validateAuthKey($authKey)
     {
-        // TODO: Implement validateAuthKey() method.
+        return $this->auth_key === $authKey;
     }
+
+    /**
+     * @throws Exception
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString();
+    }
+
+    public function beforeSave($insert)
+    {
+         if ($insert){
+             $this->generateAccessToken();
+             $this->generateAuthKey();
+         }else{
+
+         }
+         return true;
+    }
+
 }
