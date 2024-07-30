@@ -6,8 +6,9 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(['options'=>['class'=>'auth_form']])?>
         <div class="auth-form-head">Вход</div>
         <div class="auth-form-body">
-            <?=$form->field($user, 'name')?>
-            <?=$form->field($user, 'password')->input('password')?>
+            <?=$form->field($model, 'email')->input('email')?>
+            <?=$form->field($model, 'password')->input('password')?>
+            <?=$form->field($model, 'remember_me')->checkbox()?>
             <input type="submit" class="btn-main mt-3" value="Войти">
             <div class="font-size-12 mt-3">У вас ещё нет аккаунта??? <a href="<?=\yii\helpers\Url::to(['user/register'])?>">Зарегистрируйтесь</a></div>
         </div>

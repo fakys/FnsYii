@@ -12,8 +12,6 @@ class User extends ActiveRecord
 {
     public $password_confirm;
     public $new_password;
-    public $auth_key;
-    public $access_token;
 
     public function behaviors()
     {
@@ -60,7 +58,6 @@ class User extends ActiveRecord
         if($this->password){
             $this->password = Yii::$app->security->generatePasswordHash($this->password);
         }
-
     }
     public function add_status()
     {

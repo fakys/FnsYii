@@ -9,6 +9,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
 
     public $password_confirm;
+    public $remember_me;
+    public const LOGIN = 'login';
 
     public static function tableName()
     {
@@ -20,7 +22,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         return [
             'name'=>'Логин',
             'password'=>'Пароль',
-            'password_confirm'=>'Повторите пароль'
+            'password_confirm'=>'Повторите пароль',
+            'remember_me'=>'Запомнить меня'
         ];
     }
 
@@ -28,7 +31,8 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return[
             [['email','name', 'password', 'password_confirm'], 'required'],
-            [['email'], 'email']
+            [['email'], 'email'],
+            ['remember_me', 'boolean']
         ];
     }
     public static function findIdentity($id)
@@ -82,5 +86,21 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
          }
          return true;
     }
+    public function getUserByEmail()
+    {
+        return self::findOne(['email'=>$this->email]);
+    }
+    public function hasPassword()
+    {
+        if($this->password){
+            $this->password = Yii::$app->security->generatePasswordHash($this->password);
+        }
+    }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::LOGIN] = ['email', 'remember_me'];
+        return $scenarios;
+    }
 }
