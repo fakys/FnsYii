@@ -56,7 +56,7 @@ $this->beginPage();
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     Корзина
                 </a>
-                <a href="#" class="link-header">
+                <a href="<?=Url::to(['user/login'])?>" class="link-header">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     Войти
                 </a>

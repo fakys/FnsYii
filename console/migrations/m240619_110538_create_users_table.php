@@ -25,6 +25,8 @@ class m240619_110538_create_users_table extends Migration
             'avatar'=>$this->string(500),
             'password'=>$this->string(500)->notNull(),
             'status'=>$this->boolean()->defaultValue(1),
+            'auth_key'=>$this->string()->null(),
+            'access_token'=>$this->string()->null(),
             'created_at'=>$this->dateTime(),
             'updated_at'=>$this->dateTime()
         ], $tableOptions);

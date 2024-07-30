@@ -12,6 +12,8 @@ class User extends ActiveRecord
 {
     public $password_confirm;
     public $new_password;
+    public $auth_key;
+    public $access_token;
 
     public function behaviors()
     {
@@ -96,10 +98,28 @@ class User extends ActiveRecord
         }
     }
 
+    /**
+     * @throws Exception
+     */
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function generateAccessToken()
+    {
+        $this->access_token = Yii::$app->security->generateRandomString();
+    }
+
     public function beforeSave($insert)
     {
         parent::beforeSave($insert);
         if($insert){
+            $this->generateAccessToken();
+            $this->generateAuthKey();
             $this->add_user_ava();
         }else{
             $this->update_user_ava();
