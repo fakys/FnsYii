@@ -5,7 +5,7 @@ use backend\models\Catalog;
 use backend\models\Category;
 use backend\models\Product;
 use backend\models\Sale;
-use backend\models\User;
+use common\models\User;
 use backend\models\UserGroup;
 use yii\base\Behavior;
 class DataPanelBehavior extends Behavior

@@ -1,10 +1,11 @@
 <?php
 namespace frontend\controllers;
 
-use frontend\models\User;
+use common\models\User;
 use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
+use common\models\LoginForm;
 
 class UserController extends Controller
 {
@@ -28,21 +29,11 @@ class UserController extends Controller
     public function actionLogin()
     {
         $this->isAuth(true);
-        $model = new User();
-        $model->scenario = User::LOGIN;
+        $model = new LoginForm();
         if (Yii::$app->request->isPost){
             $model->load(Yii::$app->request->post());
-            $password = Yii::$app->request->post('User')['password'];
-            $login_user = $model->getUserByEmail();
-            if($login_user){
-                if(Yii::$app->security->validatePassword($password, $login_user->password)){
-                    if($model->remember_me){
-                        Yii::$app->user->login($login_user, 30 * 24 * 60 * 60);
-                    }else{
-                        Yii::$app->user->login($login_user);
-                    }
-                    return $this->redirect(['user/profile']);
-                }
+            if($model->login()){
+                $this->redirect(['user/profile']);
             }
         }
         return $this->render('login', compact('model'));

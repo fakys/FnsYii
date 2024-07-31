@@ -3,7 +3,6 @@
  * @var \yii\db\ActiveRecord $model
  */
 
-use backend\components\CreateObjectsComponent;
 use yii\widgets\ActiveForm;
 ?>
 

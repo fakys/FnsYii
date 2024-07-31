@@ -7,9 +7,10 @@ use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
+use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
 
-class User extends ActiveRecord
+class User extends ActiveRecord implements IdentityInterface
 {
     public $password_confirm;
     public $new_password;
@@ -141,10 +142,7 @@ class User extends ActiveRecord
             ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
         ];
     }
-    public function getGroup()
-    {
-        return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
-    }
+
 
     public static function findIdentity($id)
     {
@@ -174,5 +172,18 @@ class User extends ActiveRecord
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
+    }
+    public function isAdmin()
+    {
+        if($this->getGroup()->one() ){
+            if($this->getGroup()->one()->title == 'admin'||$this->getGroup()->one()->title == 'Admin'){
+                return true;
+            }
+        }
+        return false;
+    }
+    public function getGroup()
+    {
+        return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
     }
 }

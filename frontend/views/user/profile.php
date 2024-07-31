@@ -1,6 +1,6 @@
 <?php
 /**
- * @var \frontend\models\User $user
+ * @var common\models\User $user
  */
 
 ?>
@@ -20,7 +20,7 @@
                 <?php endif;?>
                 <div class="mt-3">
                     <?php if($user->isAdmin()):?>
-                        <a href="<?=Yii::getAlias('@backendUrl')."/"?>" class="btn btn-success p-1">Админ панель</a>
+                        <a href="<?=Yii::getAlias('@backendUrl')."/login"?>" class="btn btn-success p-1">Админ панель</a>
                     <?php endif;?>
                 </div>
                 <div class="links-body-profile">

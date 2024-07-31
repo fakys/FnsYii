@@ -2,11 +2,9 @@
 namespace backend\controllers;
 
 use backend\components\behaviors\DataPanelBehavior;
-use backend\models\User;
+use common\models\User;
 use Yii;
-use yii\base\InvalidRouteException;
 use yii\web\Controller;
-use function Psy\debug;
 
 class AdminController extends Controller{
 
@@ -20,12 +18,13 @@ class AdminController extends Controller{
         ];
     }
 
-//    public function beforeAction($action)
-//    {
-////        if(Yii::$app->user->isGuest){
-////            $this->redirect(['site/login']);
-////        }
-//    }
+    public function beforeAction($action)
+    {
+        if(Yii::$app->user->isGuest){
+            return $this->redirect(['site/login']);
+        }
+        return parent::beforeAction($action);
+    }
 
     public function actionIndex()
     {

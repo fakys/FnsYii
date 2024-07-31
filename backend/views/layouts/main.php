@@ -1,7 +1,9 @@
 <?php use backend\components\SidebarComponent;
 use yii\helpers\Url;
 
-\backend\assets\AppAsset::register($this) ?>
+\backend\assets\AppAsset::register($this);
+$user = Yii::$app->user->identity;
+?>
 
 
 <?php $this->beginPage()?>
@@ -93,10 +95,10 @@ use yii\helpers\Url;
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="#" class="img-circle elevation-2" alt="User Image">
+                    <img src="<?=Yii::getAlias("@frontendUrl")."/{$user->avatar}"?>" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
-                    <a href="#" class="d-block">###</a>
+                    <a href="#" class="d-block"><?=$user->name?></a>
                 </div>
             </div>
             <div>

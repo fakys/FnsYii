@@ -1,6 +1,7 @@
 <?php
 namespace backend\models;
 
+use common\models\User;
 use Yii;
 use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;

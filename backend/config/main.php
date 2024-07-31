@@ -49,7 +49,8 @@ return [
                 'admin/create/<table>'=>'admin/create/',
                 'admin/delete/<table>/<id>'=>'admin/delete/',
                 'admin/update/<table>/<id>'=>'admin/update/',
-                'admin/show-object/<table>/<id>'=>'admin/show-object/'
+                'admin/show-object/<table>/<id>'=>'admin/show-object/',
+                'login'=>'site/login'
             ],
         ],
     ],

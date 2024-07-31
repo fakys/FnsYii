@@ -21,6 +21,13 @@ class SiteController extends Controller
             ],
         ];
     }
+    public function beforeAction($action)
+    {
+        if(!Yii::$app->user->isGuest){
+            return $this->redirect(['admin/']);
+        }
+        return parent::beforeAction($action);
+    }
     public function actionLogin()
     {
         $model = new LoginForm();
