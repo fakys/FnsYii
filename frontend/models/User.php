@@ -103,4 +103,9 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
         $scenarios[self::LOGIN] = ['email', 'remember_me'];
         return $scenarios;
     }
+
+    public function getGroup()
+    {
+        return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
+    }
 }

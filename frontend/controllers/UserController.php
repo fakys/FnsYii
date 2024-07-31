@@ -36,7 +36,11 @@ class UserController extends Controller
             $login_user = $model->getUserByEmail();
             if($login_user){
                 if(Yii::$app->security->validatePassword($password, $login_user->password)){
-                    Yii::$app->user->login($login_user);
+                    if($model->remember_me){
+                        Yii::$app->user->login($login_user, 30 * 24 * 60 * 60);
+                    }else{
+                        Yii::$app->user->login($login_user);
+                    }
                     return $this->redirect(['user/profile']);
                 }
             }
@@ -63,7 +67,8 @@ class UserController extends Controller
     public function actionProfile()
     {
         $this->isAuth();
-        return 213123;
+        $user = Yii::$app->user->identity;
+        return $this->render('profile', compact('user'));
     }
 
 }
