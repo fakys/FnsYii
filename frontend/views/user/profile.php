@@ -2,6 +2,7 @@
 /**
  * @var \frontend\models\User $user
  */
+
 ?>
 
 <div class="page-profile">
@@ -17,6 +18,11 @@
                 <?php if($user->getGroup()->one()):?>
                     <div class="user-data">Группа: <?=$user->getGroup()->one()->title?></div>
                 <?php endif;?>
+                <div class="mt-3">
+                    <?php if($user->isAdmin()):?>
+                        <a href="<?=Yii::getAlias('@backendUrl')."/"?>" class="btn btn-success p-1">Админ панель</a>
+                    <?php endif;?>
+                </div>
                 <div class="links-body-profile">
                     <div><a href="#" class="btn-main">Корзина</a></div>
                     <div><a href="#" class="btn-main">Избранное</a></div>

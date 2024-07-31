@@ -1,186 +1,103 @@
 <?php
-
 namespace common\models;
 
+use backend\models\UserGroup;
 use Yii;
-use yii\base\NotSupportedException;
+use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\web\IdentityInterface;
+use yii\db\Expression;
+use yii\web\UploadedFile;
 
-/**
- * User model
- *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $verification_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
- */
-class User extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord
 {
-    const STATUS_DELETED = 0;
-    const STATUS_INACTIVE = 9;
-    const STATUS_ACTIVE = 10;
+    public $password_confirm;
+    public $new_password;
 
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return '{{%user}}';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
-        return [
-            TimestampBehavior::class,
+        return[
+            [
+                'class'=>TimestampBehavior::class,
+                'value' => new Expression('NOW()')
+            ]
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
+    public const CREATE  = 'create';
+    public const UPDATE  = 'update';
+
+    public static function tableName()
+    {
+        return 'users';
+    }
+
+    public static function tableLabel()
+    {
+        return 'Пользователи';
+    }
+
+
+    public function attributeLabels()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            'name'=>'Логин',
+            'email'=>'Email',
+            'group_id'=>'Группа',
+            'avatar'=>"Аватал",
+            'password'=>"Пароль",
+            'new_password'=>'Новый пароль',
+            'status'=>"Статус",
+            'created_at'=>"Время создания",
+            'updated_at'=>"Время обновления",
+            'password_confirm'=>"Повторите пароль"
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentity($id)
+    public function hasPassword()
     {
-        return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function findIdentityByAccessToken($token, $type = null)
-    {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-    }
-
-    /**
-     * Finds user by username
-     *
-     * @param string $username
-     * @return static|null
-     */
-    public static function findByUsername($username)
-    {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-    }
-
-    /**
-     * Finds user by password reset token
-     *
-     * @param string $token password reset token
-     * @return static|null
-     */
-    public static function findByPasswordResetToken($token)
-    {
-        if (!static::isPasswordResetTokenValid($token)) {
-            return null;
+        if($this->password){
+            $this->password = Yii::$app->security->generatePasswordHash($this->password);
         }
-
-        return static::findOne([
-            'password_reset_token' => $token,
-            'status' => self::STATUS_ACTIVE,
-        ]);
     }
-
-    /**
-     * Finds user by verification email token
-     *
-     * @param string $token verify email token
-     * @return static|null
-     */
-    public static function findByVerificationToken($token) {
-        return static::findOne([
-            'verification_token' => $token,
-            'status' => self::STATUS_INACTIVE
-        ]);
-    }
-
-    /**
-     * Finds out if password reset token is valid
-     *
-     * @param string $token password reset token
-     * @return bool
-     */
-    public static function isPasswordResetTokenValid($token)
+    public function add_status()
     {
-        if (empty($token)) {
-            return false;
+        if(!$this->status){
+            $this->status = false;
         }
-
-        $timestamp = (int) substr($token, strrpos($token, '_') + 1);
-        $expire = Yii::$app->params['user.passwordResetTokenExpire'];
-        return $timestamp + $expire >= time();
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
+    private function add_user_ava()
     {
-        return $this->getPrimaryKey();
+        $file = UploadedFile::getInstance($this, 'avatar');
+        $ava_name = Yii::$app->security->generateRandomString();
+        if($file){
+            $this->avatar = "storage/users_avatars/{$ava_name}.{$file->getExtension()}";
+            $file->saveAs("@frontend/web/{$this->avatar}");
+        }else{
+            $this->avatar = "image/user/default_user_ava.png";
+        }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthKey()
+    public function update_user_ava()
     {
-        return $this->auth_key;
+        $file = UploadedFile::getInstance($this, 'avatar');
+        $ava_name = Yii::$app->security->generateRandomString();
+        if($file){
+            $this->avatar = "storage/users_avatars/{$ava_name}.{$file->getExtension()}";
+            $file->saveAs("@frontend/web/{$this->avatar}");
+        }else{
+            unset($this->avatar);
+        }
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validateAuthKey($authKey)
+    public function update_password()
     {
-        return $this->getAuthKey() === $authKey;
+        if($this->new_password){
+            $this->password = $this->new_password;
+        }
     }
 
     /**
-     * Validates password
-     *
-     * @param string $password password to validate
-     * @return bool if password provided is valid for current user
-     */
-    public function validatePassword($password)
-    {
-        return Yii::$app->security->validatePassword($password, $this->password_hash);
-    }
-
-    /**
-     * Generates password hash from password and sets it to the model
-     *
-     * @param string $password
-     */
-    public function setPassword($password)
-    {
-        $this->password_hash = Yii::$app->security->generatePasswordHash($password);
-    }
-
-    /**
-     * Generates "remember me" authentication key
+     * @throws Exception
      */
     public function generateAuthKey()
     {
@@ -188,26 +105,74 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Generates new password reset token
+     * @throws Exception
      */
-    public function generatePasswordResetToken()
+    public function generateAccessToken()
     {
-        $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . time();
+        $this->access_token = Yii::$app->security->generateRandomString();
     }
 
-    /**
-     * Generates new token for email verification
-     */
-    public function generateEmailVerificationToken()
+    public function beforeSave($insert)
     {
-        $this->verification_token = Yii::$app->security->generateRandomString() . '_' . time();
+        parent::beforeSave($insert);
+        if($insert){
+            $this->generateAccessToken();
+            $this->generateAuthKey();
+            $this->add_user_ava();
+        }else{
+            $this->update_user_ava();
+            $this->update_password();
+        }
+        $this->hasPassword();
+        return true;
+    }
+    public function rules()
+    {
+        return [
+            [['name', 'email', 'password'], 'required', 'on'=>self::CREATE],
+            [['name', 'email'], 'required', 'on'=>self::UPDATE],
+            [['new_password', 'password', 'password_confirm','name'], 'string'],
+            ['email', 'email'],
+            ['avatar', 'image', 'extensions'=>'png, jpg, gif'],
+            ['status', 'boolean'],
+            ['group_id', 'integer'],
+            ['new_password', 'compare', 'compareAttribute'=>'password_confirm', 'on'=>self::UPDATE],
+            ['password', 'compare', 'compareAttribute'=>'password_confirm', 'on'=>self::CREATE],
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
+        ];
+    }
+    public function getGroup()
+    {
+        return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
     }
 
-    /**
-     * Removes password reset token
-     */
-    public function removePasswordResetToken()
+    public static function findIdentity($id)
     {
-        $this->password_reset_token = null;
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->auth_key === $authKey;
+    }
+
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
     }
 }

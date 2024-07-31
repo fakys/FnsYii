@@ -20,9 +20,18 @@ class AdminController extends Controller{
         ];
     }
 
+//    public function beforeAction($action)
+//    {
+////        if(Yii::$app->user->isGuest){
+////            $this->redirect(['site/login']);
+////        }
+//    }
+
     public function actionIndex()
     {
+
         $this->view->title = 'Админ панель';
+
         return $this->render('index', ['models'=>$this->get_models()]);
     }
 
@@ -100,4 +109,5 @@ class AdminController extends Controller{
         $this->view->title = "Просмотр объекта таблицы '{$model::tableLabel()}'";
         return $this->render('show_object', compact('model'));
     }
+
 }

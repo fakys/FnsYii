@@ -108,4 +108,12 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
     }
+    public function isAdmin()
+    {
+        $group = $this->getGroup()->one();
+        if($group->title == 'admin'||$group->title == 'Admin'){
+            return true;
+        }
+        return false;
+    }
 }

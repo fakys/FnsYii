@@ -104,3 +104,37 @@
     gap: 10px;
     overflow-y: auto;
 }
+.header-guest{
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    padding: 5px;
+    margin-bottom: 50px;
+}
+.page-login{
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.title-login-admin-form{
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.body-login-admin-form{
+    padding: 10px;
+}
+.body-login-admin-form{
+    border: 1px solid var(--dark);
+    border-top: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.form-auth-admin{
+    min-width: 300px;
+    width: 75%;
+}

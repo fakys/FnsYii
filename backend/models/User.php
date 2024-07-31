@@ -1,6 +1,7 @@
 <?php
 namespace backend\models;
 
+use backend\models\UserGroup;
 use Yii;
 use yii\base\Exception;
 use yii\behaviors\TimestampBehavior;
@@ -145,4 +146,34 @@ class User extends ActiveRecord
         return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
     }
 
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->auth_key === $authKey;
+    }
+
+    public function validatePassword($password)
+    {
+        dd(Yii::$app->security->validatePassword($password, $this->password));
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
 }

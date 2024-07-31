@@ -3,18 +3,16 @@
 namespace backend\controllers;
 
 use common\models\LoginForm;
+use common\models\User;
 use Yii;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-    public $layout='main';
+    public $layout= 'guest';
     public function actions()
     {
         return [
@@ -23,13 +21,16 @@ class SiteController extends Controller
             ],
         ];
     }
-    public function actionIndex()
+    public function actionLogin()
     {
-        $this->view->title = 'Админ панель';
-        return $this->render('index');
+        $model = new LoginForm();
+        if(Yii::$app->request->isPost){
+            $model->load(Yii::$app->request->post());
+            if($model->login()){
+                $this->redirect(['admin/']);
+            }
+        }
+        return $this->render('login', compact('model'));
     }
-    public function actionTest()
-    {
-        return 213123;
-    }
+
 }
