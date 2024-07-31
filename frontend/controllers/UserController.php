@@ -62,4 +62,11 @@ class UserController extends Controller
         return $this->render('profile', compact('user'));
     }
 
+    public function actionProfileChange()
+    {
+        $this->isAuth();
+        $user = Yii::$app->user->identity;
+        return $this->render('profile_change', compact('user'));
+    }
+
 }

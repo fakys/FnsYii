@@ -285,12 +285,12 @@
     border-bottom-right-radius: 15px;
     padding: 10px;
 }
-.user-avatar-profile{
+.user-avatar-profile, .change-avatar{
     padding: 5px;
     width: 300px;
     height: 300px;
 }
-.user-avatar-profile img{
+.user-avatar-profile img, .change-avatar img{
     max-width: 270px;
     max-height: 270px;
 }
