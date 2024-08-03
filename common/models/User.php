@@ -15,6 +15,8 @@ class User extends ActiveRecord implements IdentityInterface
     public $password_confirm;
     public $new_password;
 
+    public const CHANG = 'chang';
+
     public function behaviors()
     {
         return[
@@ -134,12 +136,13 @@ class User extends ActiveRecord implements IdentityInterface
             [['name', 'email'], 'required', 'on'=>self::UPDATE],
             [['new_password', 'password', 'password_confirm','name'], 'string'],
             ['email', 'email'],
+            ['email', 'unique'],
             ['avatar', 'image', 'extensions'=>'png, jpg, gif'],
             ['status', 'boolean'],
             ['group_id', 'integer'],
             ['new_password', 'compare', 'compareAttribute'=>'password_confirm', 'on'=>self::UPDATE],
             ['password', 'compare', 'compareAttribute'=>'password_confirm', 'on'=>self::CREATE],
-            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s']
+            ['created_at', 'datetime', 'format'=>'php:Y-m-d\TH:i:s', 'on'=>self::CREATE]
         ];
     }
 
@@ -185,5 +188,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function getGroup()
     {
         return $this->hasOne(UserGroup::class, ['id'=>'group_id']);
+    }
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::CREATE] = ['name', 'avatar', 'email'];
+
+        return $scenarios;
     }
 }

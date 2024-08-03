@@ -10,6 +10,7 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'=>'ru',
     'controllerNamespace' => 'frontend\controllers',
     'aliases'=>[
         '@backendUrl'=>'http://localhost:21080'

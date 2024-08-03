@@ -2,6 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\User;
+use frontend\models\UserChengForm;
 use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
@@ -62,10 +63,17 @@ class UserController extends Controller
         return $this->render('profile', compact('user'));
     }
 
-    public function actionProfileChange()
+    public function actionProfileChang()
     {
         $this->isAuth();
         $user = Yii::$app->user->identity;
+        $user->scenario = $user::UPDATE;
+        if(Yii::$app->request->isPost){
+           $user->load(Yii::$app->request->post());
+           if($user->save()){
+                $this->redirect(['user/profile']);
+           }
+        }
         return $this->render('profile_change', compact('user'));
     }
 

@@ -30,7 +30,7 @@
                     <div><a href="#" class="btn-main">Покупки</a></div>
                 </div>
             </div>
-            <div><a href="#" class="link-main"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
+            <div><a href="<?=\yii\helpers\Url::to(['user/profile-chang'])?>" class="link-main"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
         </div>
     </div>
 </div>
