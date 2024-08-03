@@ -58,4 +58,10 @@ $(document).ready(function (){
             }
         }
     })
+    $('.logout-profile-btn').on('click', function (){
+        $('.logout-menu-container').addClass('d-flex')
+    })
+    $('.align-items-center').on('click', function (){
+        $('.logout-menu-container').removeClass('d-flex')
+    })
 })

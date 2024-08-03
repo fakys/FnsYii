@@ -77,4 +77,12 @@ class UserController extends Controller
         return $this->render('profile_change', compact('user'));
     }
 
+    public function actionLogout()
+    {
+        if(!Yii::$app->user->isGuest){
+            Yii::$app->user->logout();
+        }
+        return $this->redirect(['user/login']);
+    }
+
 }

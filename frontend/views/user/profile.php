@@ -22,6 +22,9 @@
                     <?php if($user->isAdmin()):?>
                         <a href="<?=Yii::getAlias('@backendUrl')."/login"?>" class="btn btn-success p-1">Админ панель</a>
                     <?php endif;?>
+                    <div class="btn btn-danger p-1 logout-profile-btn">
+                        Выйти
+                    </div>
                 </div>
                 <div class="links-body-profile">
                     <div><a href="#" class="btn-main">Корзина</a></div>
@@ -31,6 +34,19 @@
                 </div>
             </div>
             <div><a href="<?=\yii\helpers\Url::to(['user/profile-chang'])?>" class="link-main"><i class="fa fa-cog" aria-hidden="true"></i></a></div>
+        </div>
+    </div>
+    <div class="logout-menu-container">
+        <div class="logout-menu">
+            <div class="title-logout-menu">
+                Вы уверены что хотите выйти?
+            </div>
+            <div class="body-logout-menu">
+                <a href="<?=\yii\helpers\Url::to(['user/logout'])?>" class="btn btn-danger">Выйти</a>
+                <div class="btn-main d-flex align-items-center">
+                    Назад
+                </div>
+            </div>
         </div>
     </div>
 </div>

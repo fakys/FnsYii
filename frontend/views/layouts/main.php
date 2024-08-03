@@ -56,10 +56,17 @@ $this->beginPage();
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     Корзина
                 </a>
+                <?php if(Yii::$app->user->isGuest):?>
                 <a href="<?=Url::to(['user/login'])?>" class="link-header">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     Войти
                 </a>
+                <?php else:?>
+                    <a href="<?=Url::to(['user/profile'])?>" class="link-header">
+                        <img src="<?=Yii::getAlias('@web')."/".Yii::$app->user->identity->avatar?>" class="header-user-avatar">
+                        Профиль
+                    </a>
+                <?php endif;?>
             </div>
         </div>
     </div>
