@@ -15,18 +15,22 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
-            'AuthBehavior'=>AuthBehavior::class
+            'AuthBehavior'=>[
+                'class'=>AuthBehavior::class,
+                'auth_actions'=>['profile', 'profile-chang', 'logout'],
+                'guest_action'=>['login', 'register']
+            ]
         ];
     }
-//    public function beforeAction($action)
-//    {
-//        if(!Yii::$app->user->isGuest){
-//            $this->view->params['user'] = Yii::$app->user->identity;
-//        }else{
-//            $this->view->params['user'] = [];
-//        }
-//        return parent::beforeAction($action);
-//    }
+    public function beforeAction($action)
+    {
+        if(!Yii::$app->user->isGuest){
+            $this->view->params['user'] = Yii::$app->user->identity;
+        }else{
+            $this->view->params['user'] = [];
+        }
+        return parent::beforeAction($action);
+    }
 
     private function isAuth($login=false)
     {

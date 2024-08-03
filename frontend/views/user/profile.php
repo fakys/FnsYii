@@ -3,7 +3,8 @@
  * @var common\models\User $user
  */
 
-$user_group = $this->params['user']->getGroup()->asArray()->one();
+
+    $user_group = $this->params['user']->getGroup()->asArray()->one();
 ?>
 
 <div class="page-profile">

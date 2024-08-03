@@ -1,6 +1,7 @@
 <?php
 namespace frontend\components\behaviors;
 
+use Yii;
 use yii\base\Behavior;
 use yii\base\Controller;
 
@@ -17,7 +18,11 @@ class AuthBehavior extends Behavior
     }
     public function beforeAction($action)
     {
-
+        if(Yii::$app->user->isGuest && in_array($action->action->id, $this->auth_actions)){
+           Yii::$app->response->redirect(['user/login']);
+        }elseif (!Yii::$app->user->isGuest && in_array($action->action->id, $this->guest_action)){
+            Yii::$app->response->redirect(['user/profile']);
+        }
         return true;
     }
 }
