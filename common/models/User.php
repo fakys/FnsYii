@@ -178,8 +178,9 @@ class User extends ActiveRecord implements IdentityInterface
     }
     public function isAdmin()
     {
-        if($this->getGroup()->one() ){
-            if($this->getGroup()->one()->title == 'admin'||$this->getGroup()->one()->title == 'Admin'){
+        $group = $this->getGroup()->asArray()->one();
+        if($group){
+            if($group['title'] == 'admin' || $group['title'] == 'Admin'){
                 return true;
             }
         }

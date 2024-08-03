@@ -12,6 +12,15 @@ class UserController extends Controller
 {
     public $layout = 'main';
 
+    public function beforeAction($action)
+    {
+        if(!Yii::$app->user->isGuest){
+            $this->view->params['user'] = Yii::$app->user->identity;
+        }else{
+            $this->view->params['user'] = [];
+        }
+        return parent::beforeAction($action);
+    }
 
     private function isAuth($login=false)
     {
@@ -59,8 +68,7 @@ class UserController extends Controller
     public function actionProfile()
     {
         $this->isAuth();
-        $user = Yii::$app->user->identity;
-        return $this->render('profile', compact('user'));
+        return $this->render('profile');
     }
 
     public function actionProfileChang()
