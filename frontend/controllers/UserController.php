@@ -2,7 +2,7 @@
 namespace frontend\controllers;
 
 use common\models\User;
-use frontend\models\UserChengForm;
+use frontend\components\behaviors\AuthBehavior;
 use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
@@ -12,15 +12,21 @@ class UserController extends Controller
 {
     public $layout = 'main';
 
-    public function beforeAction($action)
+    public function behaviors()
     {
-        if(!Yii::$app->user->isGuest){
-            $this->view->params['user'] = Yii::$app->user->identity;
-        }else{
-            $this->view->params['user'] = [];
-        }
-        return parent::beforeAction($action);
+        return [
+            'AuthBehavior'=>AuthBehavior::class
+        ];
     }
+//    public function beforeAction($action)
+//    {
+//        if(!Yii::$app->user->isGuest){
+//            $this->view->params['user'] = Yii::$app->user->identity;
+//        }else{
+//            $this->view->params['user'] = [];
+//        }
+//        return parent::beforeAction($action);
+//    }
 
     private function isAuth($login=false)
     {
@@ -38,7 +44,6 @@ class UserController extends Controller
 
     public function actionLogin()
     {
-        $this->isAuth(true);
         $model = new LoginForm();
         if (Yii::$app->request->isPost){
             $model->load(Yii::$app->request->post());
@@ -54,7 +59,6 @@ class UserController extends Controller
      */
     public function actionRegister()
     {
-        $this->isAuth(true);
         $user = new User();
         if(Yii::$app->request->isPost){
             $user->load(Yii::$app->request->post());
@@ -67,14 +71,12 @@ class UserController extends Controller
     }
     public function actionProfile()
     {
-        $this->isAuth();
         return $this->render('profile');
     }
 
     public function actionProfileChang()
     {
-        $this->isAuth();
-        $user = Yii::$app->user->identity;
+        $user = $this->view->params['user'];
         $user->scenario = $user::UPDATE;
         if(Yii::$app->request->isPost){
            $user->load(Yii::$app->request->post());

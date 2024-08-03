@@ -2,12 +2,24 @@
 namespace frontend\controllers;
 
 use frontend\models\Category;
+use Yii;
 use yii\web\Controller;
 
 class CategoryController extends Controller
 {
 
     public $layout = 'main';
+
+    public function beforeAction($action)
+    {
+        if(!Yii::$app->user->isGuest){
+            $this->view->params['user'] = Yii::$app->user->identity;
+        }else{
+            $this->view->params['user'] = [];
+        }
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex()
     {
         $categories = Category::find()->all();
