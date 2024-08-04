@@ -49,9 +49,9 @@ use yii\helpers\Url;
                         <li>Удаленные данные не возможно будет восстановить</li>
                     </ul>
                 </div>
-                <div class="d-flex gap-3 mr-3 mb-2">
+                <div class="d-flex mr-3 mb-2">
                     <a href="<?=Url::to(['admin/delete', 'table'=>$model::tableName(), 'id'=>$obj['id']])?>" class="btn btn-danger ml-auto">Удалить</a>
-                    <div class="btn btn-white close-delete-panel" data-id="<?=$obj['id']?>">Назад</div>
+                    <div class="btn btn-white close-delete-panel ml-3" data-id="<?=$obj['id']?>">Назад</div>
                 </div>
             </div>
         </div>
