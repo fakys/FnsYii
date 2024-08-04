@@ -5,7 +5,7 @@
                 Изменить профиль
             </div>
             <div class="change-data">
-                <?php $form = \yii\widgets\ActiveForm::begin(['options'=>['class'=>'']])?>
+                <?php $form = \yii\widgets\ActiveForm::begin(['options'=>['class'=>'', 'enctype'=>'multipart/form-data']])?>
                 <div class="form-chang-user">
                     <div class="change-avatar">
                         <div>Аватар</div>

@@ -30,7 +30,7 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::find()->where(['title'=>$catalog])->one();
         if($catalog){
-            $categories = $catalog->getCategories()->all();
+            $categories = $catalog->getCategories()->asArray()->all();
             if($categories){
                 return $this->render('show', compact('categories'));
             }

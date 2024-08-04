@@ -123,6 +123,7 @@ class User extends ActiveRecord implements IdentityInterface
             $this->generateAuthKey();
             $this->add_user_ava();
         }else{
+
             $this->update_user_ava();
             $this->update_password();
         }

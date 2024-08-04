@@ -18,14 +18,14 @@
 
             <div class="content-block-index-page">
                 <?php foreach ($catalogs as $val):?>
-                <a href="<?=\yii\helpers\Url::to(['catalog/show', 'catalog'=>$val->title])?>" class="content-block-content">
-                    <?php if($val->icon):?>
-                        <div class="content-block-image"><img src="<?=Yii::getAlias('@web').$val->icon?>"></div>
+                <a href="<?=\yii\helpers\Url::to(['catalog/show', 'catalog'=>$val['title']])?>" class="content-block-content">
+                    <?php if($val['icon']):?>
+                        <div class="content-block-image"><img src="<?=Yii::getAlias('@web').$val['icon']?>"></div>
                     <?php else:?>
                         <div class="content-block-image"><img src="<?=Yii::getAlias('@web').'/image/site/not_image.png'?>"></div>
                     <?php endif;?>
 
-                    <?=$val->title?>
+                    <?=$val['title']?>
                 </a>
                 <?php endforeach;?>
             </div>
@@ -42,14 +42,14 @@
 
                 <div class="content-block-index-page">
                     <?php foreach ($categories as $val):?>
-                    <a href="<?=\yii\helpers\Url::to(['/category/show', 'category'=>$val->title])?>" class="content-block-content">
-                        <?php if($val->icon):?>
-                            <div class="content-block-image"><img src="<?=Yii::getAlias('@web').$val->icon?>"></div>
+                    <a href="<?=\yii\helpers\Url::to(['/category/show', 'category'=>$val['title']])?>" class="content-block-content">
+                        <?php if($val['icon']):?>
+                            <div class="content-block-image"><img src="<?=Yii::getAlias('@web').$val['icon']?>"></div>
                         <?php else:?>
                             <div class="content-block-image"><img src="<?=Yii::getAlias('@web').'/image/site/not_image.png'?>"></div>
                         <?php endif;?>
 
-                        <?=$val->title?>
+                        <?=$val['title']?>
                     </a>
                     <?php endforeach;?>
                 </div>
@@ -62,21 +62,21 @@
             <div class="main-content-block">
                 <?php foreach ($products as $val):?>
                 <div class="product-block">
-                    <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>$val->id])?>" class="product-image-block">
-                        <?php if($val->main_photo):?>
-                        <img src="<?=Yii::getAlias('@web').$val->main_photo?>">
+                    <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>['id']])?>" class="product-image-block">
+                        <?php if($val['main_photo']):?>
+                        <img src="<?=Yii::getAlias('@web').$val['main_photo']?>">
                         <?php else:?>
                             <img src="<?=Yii::getAlias('@web').'/image/site/not_image.png'?>">
                         <?php endif;?>
                     </a>
                     <div class="text-center">
-                        <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>$val->id])?>" class="link-product">
-                            <?=$val->title?>
+                        <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>$val['id']])?>" class="link-product">
+                            <?=$val['title']?>
                         </a>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="price-block-main-content">
-                            <?=$val->price?> ₽
+                            <?=$val['price']?> ₽
                         </div>
                         <div class="d-flex gap-2">
                             <div class="btn-fav">

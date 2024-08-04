@@ -26,9 +26,9 @@ class SiteController extends Controller
     
     public function actionIndex()
     {
-        $catalogs = Catalog::find()->all();
-        $categories = Category::find()->all();
-        $products = Product::find()->all();
+        $catalogs = Catalog::find()->asArray()->all();
+        $categories = Category::find()->asArray()->all();
+        $products = Product::find()->asArray()->all();
 
         return $this->render('index', compact('catalogs', 'categories', 'products'));
     }
