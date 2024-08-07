@@ -2,13 +2,11 @@ $(document).ready(function (){
     $('.btn-fav').on('click', function (){
         if(!$(this).hasClass('btn-fav-active')){
             let product_id = $(this).data('product_id')
+            $(this).addClass('btn-fav-active')
             $.ajax({
                 'type':'POST',
                 'url':'/user/add-favorite',
                 'data':{'product_id':product_id},
-                'success':function (res){
-                    $(this).addClass('btn-fav-active')
-                },
                 'error':function (error){
                     console.log(error.responseText)
                 }
@@ -23,8 +21,7 @@ $(document).ready(function (){
             'url':'/user/remove-favorite',
             'data':{'product_id':product_id},
             'success':function (res){
-                console.log(product_id)
-                $('.product-favorite-'+res).addClass('d-none')
+                $('.product-favorite-'+product_id).addClass('d-none')
             },
             'error':function (error){
                 console.log(error.responseText)
