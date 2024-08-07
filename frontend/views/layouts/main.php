@@ -18,6 +18,7 @@ $this->beginPage();
     <?php if($this->title):?>
         <title><?=$this->title?></title>
     <?php endif;?>
+    <?=\yii\helpers\Html::csrfMetaTags()?>
     <?php $this->head()?>
 </head>
 <body>
@@ -49,7 +50,7 @@ $this->beginPage();
                 </form>
             </div>
             <div class="col-lg-3 d-flex justify-content-center gap-3">
-                <a href="#" class="link-header">
+                <a href="<?=Url::to(['user/favorite'])?>" class="link-header">
                     <i class="fa fa-heart" aria-hidden="true"></i>
                     Избранное
                 </a>

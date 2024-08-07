@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use common\models\User;
 use frontend\components\behaviors\AuthBehavior;
+use frontend\models\Product;
 use Yii;
 use yii\db\Exception;
 use yii\web\Controller;
@@ -97,6 +98,52 @@ class UserController extends Controller
             Yii::$app->user->logout();
         }
         return $this->redirect(['user/login']);
+    }
+
+    public function actionAddFavorite()
+    {
+
+        if(Yii::$app->request->isAjax){
+            if(Yii::$app->session->has('favorite')){
+                $session = Yii::$app->session->get('favorite');
+                if(!in_array(Yii::$app->request->post('product_id'), $session)){
+                    $session[] = Yii::$app->request->post('product_id');
+                    Yii::$app->session->set('favorite', $session);
+                }
+            }else{
+                Yii::$app->session->set('favorite', [Yii::$app->request->post('product_id')]);
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    public function actionRemoveFavorite()
+    {
+        if(Yii::$app->request->isAjax){
+            $session = Yii::$app->session;
+            $product_id = Yii::$app->request->post('product_id');
+            if($session->has('favorite')){
+                $favorite = $session->get('favorite');
+                foreach ($favorite as $key=>$val){
+                    if($val == $product_id){
+                        unset($favorite[$key]);
+                        $session->set('favorite', $favorite);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function actionFavorite()
+    {
+        $favorite = Yii::$app->session->get('favorite');
+        $products = Product::findAll($favorite);
+        return $this->render('favorite', compact('products'));
     }
 
 }
