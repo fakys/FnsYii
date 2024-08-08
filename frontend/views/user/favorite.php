@@ -24,8 +24,11 @@
     <?php endforeach;?>
 
     <?php else:?>
-        <div class="">
-
+        <div class="favorite-null-container">
+            <?=\frontend\components\NullPageComponent::widget()?>
         </div>
     <?php endif;?>
+    <div class="favorite-null-container d-none null-fav-js">
+        <?=\frontend\components\NullPageComponent::widget()?>
+    </div>
 </div>

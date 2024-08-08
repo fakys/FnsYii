@@ -62,7 +62,7 @@
             <div class="main-content-block">
                 <?php foreach ($products as $val):?>
                 <div class="product-block">
-                    <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>['id']])?>" class="product-image-block">
+                    <a href="<?=\yii\helpers\Url::to(['product/show/', 'id'=>$val['id']])?>" class="product-image-block">
                         <?php if($val['main_photo']):?>
                         <img src="<?=Yii::getAlias('@web').$val['main_photo']?>">
                         <?php else:?>
@@ -79,9 +79,21 @@
                             <?=$val['price']?> ₽
                         </div>
                         <div class="d-flex gap-2">
-                            <div class="btn-fav">
-                                <i class="fa fa-heart" aria-hidden="true"></i>
-                            </div>
+                            <?php if(Yii::$app->session->has('favorite') && in_array($val['id'], Yii::$app->session->get('favorite'))):?>
+                                <div class="btn-fav-active" data-product_id="<?=$val['id']?>">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                </div>
+                                <div class="btn-fav d-none" data-product_id="<?=$val['id']?>">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                </div>
+                            <?php else:?>
+                                <div class="btn-fav-active d-none" data-product_id="<?=$val['id']?>">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                </div>
+                                <div class="btn-fav" data-product_id="<?=$val['id']?>">
+                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                </div>
+                            <?php endif;?>
                             <div class="p-0 btn-buy">
                                 <i class="fa fa-shopping-cart font-size-20" aria-hidden="true"></i>
                             </div>

@@ -59,7 +59,21 @@ $photos = $product->getPhotos()->asArray()->all();
             <div class="buy-block">
                 <div class="buy-block-container">
                     <div class="price-product"><?=$product->price?> ₽</div>
-                    <div class="fav-btn-product"><i class="fa fa-heart" aria-hidden="true"></i></div>
+                    <?php if(Yii::$app->session->has('favorite') && in_array($product->id, Yii::$app->session->get('favorite'))):?>
+                        <div class="btn-fav-active product-fav-show" data-product_id="<?=$product->id?>">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </div>
+                        <div class="btn-fav d-none product-fav-show" data-product_id="<?=$product->id?>">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </div>
+                    <?php else:?>
+                        <div class="btn-fav-active d-none product-fav-show" data-product_id="<?=$product->id?>">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </div>
+                        <div class="btn-fav product-fav-show" data-product_id="<?=$product->id?>">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                        </div>
+                    <?php endif;?>
                     <div class="buy-btn-product">Купить</div>
                 </div>
 

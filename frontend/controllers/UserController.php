@@ -143,6 +143,7 @@ class UserController extends Controller
     {
         $favorite = Yii::$app->session->get('favorite');
         $products = Product::findAll($favorite);
+        $this->view->title = 'Избранное';
         return $this->render('favorite', compact('products'));
     }
 
