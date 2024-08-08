@@ -1,4 +1,5 @@
 <div class="favorite-page">
+    <?php if($products):?>
     <?php foreach ($products as $value):?>
         <div class="product-favorite-container  product-favorite-<?=$value->id?>">
             <div class="product-favorite-image">
@@ -21,4 +22,10 @@
             </div>
         </div>
     <?php endforeach;?>
+
+    <?php else:?>
+        <div class="">
+
+        </div>
+    <?php endif;?>
 </div>
